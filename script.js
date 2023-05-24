@@ -48,31 +48,40 @@ window.onscroll = () => {
     let footer = document.querySelector('footer');
     footer.classList.toggle('show-animate', window.innerHeight + window.scrollY >= document.scrollingElement.scrollHeight);
 };
-
-// JavaScript code to handle carousel functionality
-
 // Get the carousel container element
 const carouselContainer = document.querySelector('.carousel-container');
 
 // Get the previous and next buttons
-const prevButton = document.querySelector('.btn-box .btn:first-child');
-const nextButton = document.querySelector('.btn-box .btn:last-child');
+const prevButton = document.querySelector('.btn-box .btn:first-of-type');
+const nextButton = document.querySelector('.btn-box .btn:last-of-type');
+
+// Get all the projects in the carousel
+const projects = carouselContainer.querySelectorAll('.project');
+
+// Set the current project index
+let currentProjectIndex = 0;
 
 // Event listener for the previous button
 prevButton.addEventListener('click', () => {
-  // Scroll to the previous project
-  carouselContainer.scrollBy({
-    left: -carouselContainer.offsetWidth,
-    behavior: 'smooth',
-  });
+  if (currentProjectIndex > 0) {
+    currentProjectIndex--;
+    scrollToCurrentProject();
+  }
 });
 
 // Event listener for the next button
 nextButton.addEventListener('click', () => {
-  // Scroll to the next project
-  carouselContainer.scrollBy({
-    left: carouselContainer.offsetWidth,
-    behavior: 'smooth',
-  });
+  if (currentProjectIndex < projects.length - 1) {
+    currentProjectIndex++;
+    scrollToCurrentProject();
+  }
 });
 
+// Function to scroll to the current project
+function scrollToCurrentProject() {
+  const projectWidth = projects[currentProjectIndex].offsetWidth;
+  carouselContainer.scrollTo({
+    left: projectWidth * currentProjectIndex,
+    behavior: 'smooth',
+  });
+}
