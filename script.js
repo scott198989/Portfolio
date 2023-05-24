@@ -1,55 +1,52 @@
-// Add submit event listener to the form
-contactForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevent form submission
-  
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const mobile = document.getElementById('mobile').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    const coverLetter = document.getElementById('cover-letter').checked;
-    const resume = document.getElementById('resume').checked;
-  
-    // Create a nodemailer transporter
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.comcast.net', // Comcast SMTP server
-      port: 587, // Port for SMTP
-      secure: false, // Set to true if using a secure connection (e.g., TLS)
-      auth: {
-        user: 'scott-tuschl@comcast.net', // Your email address
-        pass: 'GOOarmy1989!', // Your email account password
-      },
-    });
-  
-    // Compose the email message
-    const emailMessage = `
-      Name: ${name}
-      Email: ${email}
-      Mobile: ${mobile}
-      Subject: ${subject}
-      Message: ${message}
-      Cover Letter Requested: ${coverLetter ? 'Yes' : 'No'}
-      Resume Requested: ${resume ? 'Yes' : 'No'}
-    `;
-  
-    // Send the email
-    transporter.sendMail(
-      {
-        from: email, // Use the user's entered email as the 'from' field
-        to: 'scott-tuschl@comcast.net',
-        subject: 'New Contact Form Submission',
-        text: emailMessage,
-      },
-      (error, info) => {
-        if (error) {
-          console.error(error);
-          // Handle the error, e.g., show an error message to the user
+
+// Toggle icon nav
+let menuIcon = document.querySelector('#menu-icon');
+let navbar = document.querySelector('.navbar');
+
+menuIcon.onclick = () => {
+    menuIcon.classList.toggle('bx-x');
+    navbar.classList.toggle('active');
+};
+
+// Scroll section
+let sections = document.querySelectorAll('section');
+let navLinks = document.querySelectorAll('header nav a');
+
+window.onscroll = () => {
+    sections.forEach(sec => {
+        let top = window.scrollY;
+        let offset = sec.offsetTop - 100;
+        let height = sec.offsetHeight;
+        let id = sec.getAttribute('id');
+
+        if (top >= offset && top < offset + height) {
+            // Active navbar links
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                document.querySelector(`header nav a[href*="${id}"]`).classList.add('active');
+            });
+            // active sections for animation scroll
+            sec.classList.add('show-animate');
         } else {
-          console.log('Email sent:', info.response);
-          // Handle the success, e.g., show a success message to the user
+            sec.classList.remove('show-animate');
         }
-      }
-    );
-  });
-  transporter.debug = true;
+    });
+
+    let header = document.querySelector('header');
+
+    header.classList.toggle('sticky', window.scrollY > 100);
+    
+    // Remove toggle icon and navbar when clicking navbar links (scroll)
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuIcon.classList.remove('bx-x');
+            navbar.classList.remove('active');
+        });
+    });
+
+    // Animate footer on scroll
+    let footer = document.querySelector('footer');
+    footer.classList.toggle('show-animate', window.innerHeight + window.scrollY >= document.scrollingElement.scrollHeight);
+};
+
+

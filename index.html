@@ -264,45 +264,44 @@
                     </section>
       
 <!-- Contact Section Design -->
-<section class="contact" id="contact">
+<section <section class="contact" id="contact">
     <h2 class="heading">Contact <span>Me</span></h2>
-    <form id="contactform" action="#">
+    <form id="contact-form" action="https://formspree.io/f/mbjeeyol" method="POST">
         <div class="input-box">
             <div class="input-field">
-                <input type="text" id="name" placeholder="Full Name" required>
+                <input type="text" id="name" name="name" placeholder="Full Name" required>
                 <span class="focus"></span>
             </div>
             <div class="input-field">
-                <input type="email" id="email" placeholder="Email Address" required>
+                <input type="email" id="email" name="email" placeholder="Email Address" required>
                 <span class="focus"></span>
             </div>
         </div>
         <div class="input-box">
             <div class="input-field">
-                <input type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="mobile" placeholder="Mobile Number" required>
+                <input type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="mobile" name="mobile" placeholder="Mobile Number" required>
                 <span class="focus"></span>
             </div>
             <div class="input-field">
-                <input type="text" id="subject" placeholder="Email Subject" required>
+                <input type="text" id="subject" name="subject" placeholder="Email Subject" required>
                 <span class="focus"></span>
             </div>
         </div>
         <div class="textarea-field">
-            <textarea id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+            <textarea id="message" name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
             <span class="focus"></span>
         </div>
         <div class="checkbox-field">
             <label for="cover-letter">Request Cover Letter</label>
-            <input type="checkbox" id="cover-letter">
+            <input type="checkbox" id="cover-letter" name="cover-letter">
             <label for="resume">Request Resume</label>
-            <input type="checkbox" id="resume">
+            <input type="checkbox" id="resume" name="resume">
         </div>
         <div class="btn-box btns">
             <button type="submit" class="btn">Submit</button>
         </div>
     </form>
 </section>
-
 
 <footer class="footer">
     <div class="footer-text">
