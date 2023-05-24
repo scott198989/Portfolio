@@ -49,4 +49,30 @@ window.onscroll = () => {
     footer.classList.toggle('show-animate', window.innerHeight + window.scrollY >= document.scrollingElement.scrollHeight);
 };
 
+// JavaScript code to handle carousel functionality
+
+// Get the carousel container element
+const carouselContainer = document.querySelector('.carousel-container');
+
+// Get the previous and next buttons
+const prevButton = document.querySelector('.btn-box .btn:first-child');
+const nextButton = document.querySelector('.btn-box .btn:last-child');
+
+// Event listener for the previous button
+prevButton.addEventListener('click', () => {
+  // Scroll to the previous project
+  carouselContainer.scrollBy({
+    left: -carouselContainer.offsetWidth,
+    behavior: 'smooth',
+  });
+});
+
+// Event listener for the next button
+nextButton.addEventListener('click', () => {
+  // Scroll to the next project
+  carouselContainer.scrollBy({
+    left: carouselContainer.offsetWidth,
+    behavior: 'smooth',
+  });
+});
 
