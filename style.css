@@ -915,14 +915,19 @@ text-align: center;
 }
 
 .carousel-container {
-  display: flex;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  
 }
 
 .carousel {
   display: flex;
+  font-size: 2rem;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
   scroll-snap-align: start;
 }
 
@@ -933,8 +938,3 @@ text-align: center;
   scroll-snap-stop: always;
 }
 
-.btn-box {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
