@@ -47,3 +47,58 @@ window.onscroll = () => {
   let footer = document.querySelector('footer');
   footer.classList.toggle('show-animate', window.innerHeight + window.scrollY >= document.scrollingElement.scrollHeight);
 };
+
+   // JavaScript logic for carousel functionality
+   document.addEventListener("DOMContentLoaded", function(event) {
+    const prevButton = document.querySelector(".arrow.prev");
+    const nextButton = document.querySelector(".arrow.next");
+    const carouselWrapper = document.querySelector(".carousel-wrapper");
+    const carouselItems = Array.from(document.querySelectorAll(".carousel-item"));
+
+    let currentIndex = 0;
+
+    // Function to update the active item
+    function updateActiveItem() {
+      carouselItems.forEach((item, index) => {
+        if (index === currentIndex) {
+          item.classList.add("active");
+        } else {
+          item.classList.remove("active");
+        }
+      });
+    }
+
+    // Function to go to the previous item
+    function goToPrevItem() {
+      currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
+      updateActiveItem();
+    }
+
+    // Function to go to the next item
+    function goToNextItem() {
+      currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+      updateActiveItem();
+    }
+
+    // Start carousel auto-spin
+    let carouselInterval = setInterval(goToNextItem, 3000);
+
+    // Event listeners for previous and next buttons
+    prevButton.addEventListener("click", () => {
+      clearInterval(carouselInterval);
+      goToPrevItem();
+    });
+
+    nextButton.addEventListener("click", () => {
+      clearInterval(carouselInterval);
+      goToNextItem();
+    });
+  });
+
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  

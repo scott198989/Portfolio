@@ -629,6 +629,19 @@ span {
   color: var(--text-color);
 }
 
+.checkbox-field label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.checkbox-field input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+
+
 .contact form .focus {
   position: absolute;
   top: 0;
@@ -644,7 +657,7 @@ span {
 .contact form .input-box .input-field input:focus~.focus,
 .contact form .input-box .input-field input.valid~.focus,
 .contact form .textarea-field textarea.focus~.focus,
-.contact form .textarea-field textareavalid~.focus {
+.contact form .textarea-field textarea.valid~.focus {
   width: 100%;
 }
 
@@ -913,85 +926,122 @@ text-align: center;
       opacity: 0;
   }
 }
-.carousel-container {
+
+
+      /* Reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      /* Set container width and height */
+      .grid-container {
+        width: 600px;
+        margin: 50px auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      
+      /* Style the grid item */
+      .grid-item {
+        position: relative;
+        perspective: 1000px;
+        overflow: hidden;
+        box-shadow: 0 0 10px var(--main-color);
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+      }
+      
+      /* Style the grid item image */
+      .grid-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      /* Create the shadow element */
+      .grid-item::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(50%, -50%);
+        width: 100%;
+        height: 100%;
+        opacity: 40%;
+        transition: opacity .3s;
+      }
+      
+      /* Define the hover effect */
+      .grid-item:hover {
+        transform: translateZ(-20px) rotateX(20deg) rotateY(20deg);
+        box-shadow: 0 0 400px var(--main-color);
+      }
+      
+      .grid-item:hover::before {
+        opacity: 1;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 55px;
+        margin-top: 20px;
+        
+      }
+      .grid-item:hover {
+        transform: scale(1.1);
+      }
+      .grid-item img {
+        transition: transform 0.3s;
+      }
+      
+      .grid-item:hover img {
+        transform: scale(1.1);
+      }
+      .grid-item::before {
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.4);
+      }
+      
+      .grid-item:hover::before {
+        opacity: 0.8;
+      }
+      .demo-button {
+        background-color: #00abf0;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      .demo-button:hover {
+        background-color: #0077b3;
+      }
+
+      /* keep everything above */
+
+/* Position the grid item content container */
+.grid-item {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Style the demo button and description */
+.grid-item-content {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
   width: 100%;
-  max-width: 500px; /* Adjust the maximum width as needed */
-  margin: 0 auto;
   padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  transition: bottom 0.3s;
 }
 
-.media-scroller {
-  width: 100%;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  white-space: nowrap;
-  margin-bottom: 20px;
-}
-
-.carousel {
-  display: inline-flex;
-  scroll-snap-align: start;
-}
-
-.carousel-items {
-  display: flex;
-}
-
-.media-group {
-  flex: 0 0 100%;
-  padding: 0 10px;
-}
-
-.media-element {
-  width: 100%;
-}
-
-.media-element img {
-  width: 100%;
-  height: auto;
-}
-
-/* Hide horizontal scrollbar */
-.media-scroller::-webkit-scrollbar {
-  display: contents;
-}
-
-/* Add navigation buttons */
-.carousel-container svg {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  fill: #ffffff;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.carousel-container #next {
-  right: 10px;
-}
-
-.carousel-container #previous {
-  left: 10px;
-}
-
-.carousel-navigation {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  fill: #ffffff;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.carousel-navigation #next {
-  right: 10px;
-}
-
-.carousel-navigation #previous {
-  left: 10px;
+/* Show the demo button and description on hover */
+.grid-item:hover .grid-item-content {
+  bottom: 0;
 }
