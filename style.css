@@ -18,7 +18,7 @@
     --text-color: #ededed;
     --main-color: #00abf0;
 }
-/* everything above this is spaced correctly */
+
 html {
     font-size: 62.5%;
     overflow-x: hidden;
@@ -1008,6 +1008,18 @@ skills-box .skills-content:before {
       .grid-item:hover::before {
         opacity: 0.8;
       }
+      .grid-item {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .project-details {
+        margin-bottom: 10px; /* Add some spacing between the description and the button */
+      }
+      .desc {
+        padding: 10px; /* Adjust the padding value as needed */
+      }
+      
       .demo-button {
         background-color: #00abf0;
         color: white;
@@ -1015,11 +1027,14 @@ skills-box .skills-content:before {
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        align-self: flex-start; /* Align the button to the start of the container */
+        margin-top: auto; /* Push the button to the bottom of the container */
       }
       
       .demo-button:hover {
-        background-color: #0077b3;
+        background-color: #0077b3 !important;
       }
+      
 
       /* keep everything above */
 
