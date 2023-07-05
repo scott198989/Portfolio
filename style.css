@@ -29,7 +29,7 @@ body {
     color: var(--text-color);
   }
 
-.header {
+  .header {
     position: fixed;
     top: 0;
     left: 0;
@@ -40,7 +40,9 @@ body {
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    background-color: transparent; /* Add this line to make the header background transparent */
   }
+  
 
 .header-sticky {
   background: var(--bg-color);
@@ -680,7 +682,7 @@ skills-box .skills-content:before {
       padding: 2rem 4%;
     }
   
-    .navbar {
+    /* .navbar {
       position: absolute;
       top: 100%;
       left: 0;
@@ -692,7 +694,19 @@ skills-box .skills-content:before {
       transition: .25s ease;
       transition-delay: .25s;
     }
-  
+   */
+   .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 4%;
+    background: var(--main-color); /* Change this to the desired background color for the navbar */
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    z-index: 1;
+    transition: .25s ease;
+    transition-delay: .25s;
+  }
     .navbar-active {
       transition-delay: 0;
       left: 0;
