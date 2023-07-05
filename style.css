@@ -751,7 +751,7 @@ skills-box .skills-content:before {
   }
   }
 
-  /* @media (max-width: 1200px) {
+  @media (max-width: 1200px) {
   html {
     font-size:  55%;
   }
@@ -924,7 +924,7 @@ skills-box .skills-content:before {
   75%, 
   81% {
       opacity: 0;
-  } */
+  }
   }
   * {
     margin: 0;
