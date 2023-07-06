@@ -47,18 +47,23 @@ body {
   }
 
 .logo {
+  position: relative;
     font-size: 2.5rem;
     color: var(--text-color);
     font-weight: 600;
   }
 
-/* .navbar a {
+.navbar {
+  position: relative;
+}
+
+.navbar a {
     font-size: 1.7rem;
     color: var(--text-color);
     font-weight: 500;
     margin-left: 3.5rem;
     transition: 3s;
-  } */
+  }
 
 .navbar a:hover,
 .navbar a.active {
@@ -66,6 +71,7 @@ body {
   }
 
 #menu-icon {
+    position: relative;
     font-size: 3.6rem;
     color: var(--text-color);
     cursor: pointer;
@@ -96,6 +102,8 @@ section {
   }
 
 .home-content h1 {
+    position: relative;
+    display: inline-block;
     font-size: 5.6rem;
     font-weight: 700;
     line-height: 1.3;
@@ -123,6 +131,11 @@ section {
     animation-delay: 2s;
   }
 
+  .home.show-animate .home-content .text-animate h3 {
+    animation: homeBgText 6s linear infinite;
+    animation-delay: 2s;
+  }
+
 .home-content .text-animate h3:before  {
   content: '';
   position: absolute;
@@ -132,12 +145,12 @@ section {
   height: 100%;
   border-right: 2px solid var(--main-color);
   z-index: -1;
-  animation: homeCurText 6s linear infinite;
+  animation: homeCursorText 6s linear infinite;
   animation-delay: 2s;
   }
 
 .home.show-animate .home-content .text-animate h3:before {
-  animation: homeCurText 6s linear infinite;
+  animation: homeCursorText 6s linear infinite;
   animation-delay: 2s;
   }
 
@@ -255,7 +268,7 @@ section {
     width: 100%;
   }
 
-/* .home-imgHover {
+.home-imgHover {
     position: absolute;
     top: 0;
     right: 0;
@@ -263,12 +276,12 @@ section {
     height: 100%;
     background: transparent;
     transition: 3s;
-  } */
+  }
 
-/* .home-imgHover:hover {
+.home-imgHover:hover {
     background: var(--bg-color);
     opacity: .8;
-  } */
+  }
 
 .about {
     display: flex;
@@ -281,6 +294,7 @@ section {
   }
 
 .heading {
+  position: relative;
     font-size: 5rem;
     margin-bottom: 3rem;
     text-align: center;
@@ -343,10 +357,13 @@ span {
   }
 
 .about-content h3 {
+  position: relative;
+  display: inline-block;
     font-size: 2.5rem;
   }
 
 .about-content p {
+  position: relative;
     font-size: 2.6rem;
     margin: 2rem 3rem;
   }
@@ -382,11 +399,14 @@ span {
   }
 
 .education-column .title {
+  position: relative;
+  display: inline-block;
     font-size: 3rem;
     margin: 0 0 1.5rem .2rem;
   }
 
 .education-column .education-box {
+  position: relative;
     border-left: 0.2rem solid var(--main-color);
   }
 
@@ -456,6 +476,12 @@ span {
   background: var(--second-bg-color);
   }
 
+.skills h2 {
+
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .skills .skills-row {
     display: flex;
     flex-wrap: wrap;
@@ -467,9 +493,12 @@ span {
   }
 
 .skills-column .title {
+ 
     font-size: 2.5rem;
     margin: 0 0 1.5rem;
   }
+
+
 
 .skills-box .skills-content {
     position: relative;
@@ -593,6 +622,12 @@ skills-box .skills-content:before {
     min-height: auto;
     padding-bottom: 7rem;
   }
+
+.contact h2 {
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
   .contact form {
     max-width: 70rem;
@@ -722,6 +757,44 @@ skills-box .skills-content:before {
 .footer-iconTop a:hover i {
   color: var(--main-bg-color);
 }
+.animate {
+position: absolute;
+top: 0;
+right: 0;
+width: 100%;
+height: 100%;
+background: var(--bg-color);
+z-index: 98;
+}
+
+.animate.home-img {
+width: 50%;
+}
+
+.logo .animate,
+.navbar .animate,
+#menu-icon .animate,
+.home.show-animate .animate {
+  animation: showRight 1s ease forwards;
+  animation-delay: calc(.3s * var(--i));
+}
+.animate.scroll {
+  transition: 1s ease;
+  transition-delay: calc(.3s / var(--i));
+  animation: none;
+}
+
+.education .education-box .animate.scroll {
+  width: 100%;
+}
+
+.about.show-animate .animate.scroll,
+.education.show-animate .animate.scroll,
+.skills.show-animate .animate.scroll,
+.contact.show-animate .animate.scroll {
+  transition-delay: calc(.3s * var(--i));
+  width: 0;
+}
 
   .footer-iconTop a i {
     font-size: 2.4rem;
@@ -816,12 +889,12 @@ skills-box .skills-content:before {
   .navbar.active .active-nav {
     transition-delay: .25s;
     left: 0;
-    /* position: absolute;
+    position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
     border-top: .1rem solid rgba(0, 0, 0, .2);
-    z-index: -1; */
+    z-index: -1;
   }
   
   .navbar a {
@@ -864,7 +937,7 @@ skills-box .skills-content:before {
 
   @media (max-width: 462px) {
   .home-content h1 {
-    font-size :5.2rem;
+    font-size: 5.2rem;
   }
   .education {
     padding: 10rem 4% 5rem 5%
@@ -885,7 +958,8 @@ skills-box .skills-content:before {
   .home {
     justify-content: center;
   }
-  .home-content {display: flex;
+  .home-content {
+    display: flex;
     align-items: center;
     flex-direction: column;
     text-align: center;
@@ -895,47 +969,18 @@ skills-box .skills-content:before {
 
   }
   } 
-
-/* Mobile Styles */
-/* @media (max-width: 462px) {
-  .home-content h1 {
-    font-size: 5.2rem;
-  }
-
-  .education {
-    padding: 10rem 4% 5rem 5%;
-  }
-
-  .contact form .input-box .input-field {
-    width: 100%;
-  }
-
-  .footer {
-    flex-direction: column-reverse;
-  }
-
-  .footer p {
-    margin-top: 2rem;
-    text-align: center;
-  }
-} */
-
-/* @media (max-width: 371px) {
-  .home {
-    justify-content: center;
-  }
-
   .home-content {
     display: flex;
     align-items: center;
     flex-direction: column;
     text-align: center;
   }
-
   .home-content h1 {
     font-size: 5rem;
   }
-} */
+} 
+
+/* Animations */
 
   @keyframes homeBgText {
 
@@ -948,20 +993,6 @@ skills-box .skills-content:before {
   65%, 
   85% {
   background-position: 0 0;}
-  }
-  }
-
-
-  @keyframes homeBgText {
-  0%, 
-  10%, 
-  100% {
-      background-position: -33rem 0;
-  }
-  65%, 
-  85% {
-      background-position: 0 0;
-  }
   }
 
   @keyframes homeCursorText {
@@ -981,6 +1012,20 @@ skills-box .skills-content:before {
       opacity: 0;
   }
   }
+
+  @keyframes aboutSpinner {
+    100% {
+      transform: translate(-50%, -50%) rotate(0); 
+    }
+  } 
+
+  @keyframes showRight {
+    100% {
+      width: 0;
+    }
+  }
+
+  /* projects */
   * {
     margin: 0;
     padding: 0;

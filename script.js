@@ -21,9 +21,10 @@ window.onscroll = () => {
                 link.classList.remove('active');
                 document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
             });
-            // sec.classList.add('show-animate');
-        // } else {
-            // sec.classList.remove('show-animate');
+            sec.classList.add('show-animate');
+        } 
+        else {
+            sec.classList.remove('show-animate');
         }
     });
 
@@ -31,39 +32,39 @@ window.onscroll = () => {
     header.classList.toggle('sticky', window.scrollY > 100);
 };
 
-// navLinks.forEach(link => {
-//     link.addEventListener('click', () => {
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
         menuIcon.classList.remove('bx-x');
         navbar.classList.remove('active');
-//     });
-// });
+    });
+});
 
-// let footer = document.querySelector('footer');
-// footer.classList.toggle('show-animate', window.innerHeight + window.scrollY >= document.scrollingElement.scrollHeight);
+let footer = document.querySelector('footer');
+footer.classList.toggle('show-animate', this.innerHeight + this.scrollY >= document.scrollingElement.scrollHeight);
 
-// function updateActiveItem() {
-//     carouselItems.forEach((item, index) => {
-//         if (index === currentIndex) {
-//             item.classList.add("active");
-//         } else {
-//             item.classList.remove("active");
-//         }
-//     });
-// }
+function updateActiveItem() {
+    carouselItems.forEach((item, index) => {
+        if (index === currentIndex) {
+            item.classList.add("active");
+        } else {
+            item.classList.remove("active");
+        }
+    });
+}
 
-// function goToPrevItem() {
-//     currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
-//     updateActiveItem();
-// }
+function goToPrevItem() {
+    currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
+    updateActiveItem();
+}
 
-// function goToNextItem() {
-//     currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
-//     updateActiveItem();
-// }
+function goToNextItem() {
+    currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+    updateActiveItem();
+}
 
-// function scrollToSection(sectionId) {
-//     const section = document.getElementById(sectionId);
-//     if (section) {
-//         section.scrollIntoView({ behavior: 'smooth' });
-//     }
-// }
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
