@@ -52,13 +52,13 @@ body {
     font-weight: 600;
   }
 
-.navbar a {
+/* .navbar a {
     font-size: 1.7rem;
     color: var(--text-color);
     font-weight: 500;
     margin-left: 3.5rem;
     transition: 3s;
-  }
+  } */
 
 .navbar a:hover,
 .navbar a.active {
@@ -782,7 +782,7 @@ skills-box .skills-content:before {
   .navbar {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: -100%;
     width: 100%;
     padding: 1rem 4%;
     background: var(--main-color);
@@ -791,27 +791,10 @@ skills-box .skills-content:before {
     transition: .25s ease;
     transition-delay: .25s;
   }
-  /* .navbar-active {
+  .navbar-active {
     transition-delay: 0;
     left: 0;
   }
-
-  .navbar .active-nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:  var(--bg-color);
-    border-top: .1rem solid rgba(0, 0, 0, .2);
-    transition: .25s ease;
-    transition-delay: 0%;
-  }
-
-  .navbar-active .active-nav {
-    transition-delay: .25s;
-    left: 0;
-  } */
 
   .navbar .active-nav {
     position: absolute;
@@ -823,11 +806,18 @@ skills-box .skills-content:before {
     border-top: .1rem solid rgba(0, 0, 0, .2);
     transition: .25s ease;
     transition-delay: 0s;
+    z-index: -1;
   }
   
   .navbar.active .active-nav {
     transition-delay: .25s;
     left: 0;
+    /* position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-top: .1rem solid rgba(0, 0, 0, .2);
+    z-index: -1; */
   }
   
   .navbar a {
@@ -835,6 +825,7 @@ skills-box .skills-content:before {
     font-size: 2rem;
     margin: 3rem 0;
     transform: translateX(-20rem);
+    transition: .25s ease;
     transition-delay: 0s;
   }
   
@@ -847,13 +838,10 @@ skills-box .skills-content:before {
     display: block;
     font-size: 2rem;
     margin: 3rem 0;
-    transform: translateX(-20rem);
-    transition-delay: 0s;
+    /* transform: translateX(-20rem);
+    transition-delay: 0s; */
   }
-  .navbar.active a {
-    transform: translateX(0);
-    -moz-transition-delay: .25s;
-  }
+
   .home-imgHover {
     pointer-events: none;
     background: var(--bg-color);
