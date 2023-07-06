@@ -255,7 +255,7 @@ section {
     width: 100%;
   }
 
-.home-imgHover {
+/* .home-imgHover {
     position: absolute;
     top: 0;
     right: 0;
@@ -263,12 +263,12 @@ section {
     height: 100%;
     background: transparent;
     transition: 3s;
-  }
+  } */
 
-.home-imgHover:hover {
+/* .home-imgHover:hover {
     background: var(--bg-color);
     opacity: .8;
-  }
+  } */
 
 .about {
     display: flex;
@@ -719,6 +719,10 @@ skills-box .skills-content:before {
     width: 100%;
   }
 
+.footer-iconTop a:hover i {
+  color: var(--main-bg-color);
+}
+
   .footer-iconTop a i {
     font-size: 2.4rem;
     color: var(--bg-color);
@@ -791,7 +795,7 @@ skills-box .skills-content:before {
     transition: .25s ease;
     transition-delay: .25s;
   }
-  .navbar-active {
+  .navbar.active {
     transition-delay: 0;
     left: 0;
   }
@@ -799,7 +803,7 @@ skills-box .skills-content:before {
   .navbar .active-nav {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
     background: var(--bg-color);
@@ -834,14 +838,6 @@ skills-box .skills-content:before {
     transition-delay: .25s;
   }
 
-  .navbar a {
-    display: block;
-    font-size: 2rem;
-    margin: 3rem 0;
-    /* transform: translateX(-20rem);
-    transition-delay: 0s; */
-  }
-
   .home-imgHover {
     pointer-events: none;
     background: var(--bg-color);
@@ -865,7 +861,7 @@ skills-box .skills-content:before {
     height: 38px;
   }
   }
-/* 
+
   @media (max-width: 462px) {
   .home-content h1 {
     font-size :5.2rem;
@@ -898,10 +894,10 @@ skills-box .skills-content:before {
     font-size: 5rem;
 
   }
-  } */
+  } 
 
 /* Mobile Styles */
-@media (max-width: 462px) {
+/* @media (max-width: 462px) {
   .home-content h1 {
     font-size: 5.2rem;
   }
@@ -922,9 +918,9 @@ skills-box .skills-content:before {
     margin-top: 2rem;
     text-align: center;
   }
-}
+} */
 
-@media (max-width: 371px) {
+/* @media (max-width: 371px) {
   .home {
     justify-content: center;
   }
@@ -939,7 +935,7 @@ skills-box .skills-content:before {
   .home-content h1 {
     font-size: 5rem;
   }
-}
+} */
 
   @keyframes homeBgText {
 

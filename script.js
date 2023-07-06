@@ -33,8 +33,8 @@ window.onscroll = () => {
 
 // navLinks.forEach(link => {
 //     link.addEventListener('click', () => {
-//         menuIcon.classList.remove('bx-x');
-//         navbar.classList.remove('active');
+        menuIcon.classList.remove('bx-x');
+        navbar.classList.remove('active');
 //     });
 // });
 
