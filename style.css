@@ -1202,13 +1202,13 @@ width: 50%;
   color: var(--main-color);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 371px) {
   .grid-container {
     grid-template-columns: 1fr;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 371px) {
   .project-description {
     font-size: 1.4rem;
   }
