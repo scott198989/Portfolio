@@ -35,7 +35,7 @@ body {
     left: 0;
     width: 100%;
     padding: 2rem 9%;
-    background: transparent;
+    background: var(--bg-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -710,6 +710,8 @@ skills-box .skills-content:before {
     cursor: pointer;
   }
 
+
+  
   @media (max-width: 462px) {
 
   .home-content h1 {
@@ -810,6 +812,8 @@ width: 50%;
     width: 100%;
   }
 
+/* Different Screen Sizes aka Mobile ect.. */
+
   @media (max-width: 371px) {
 
   .home {
@@ -862,7 +866,7 @@ width: 50%;
     left: -100%;
     width: 100%;
     padding: 1rem 4%;
-    background: var(--main-color);
+    background: var(--bg-color); 
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
     z-index: 1;
     transition: .25s ease;
@@ -1044,8 +1048,8 @@ width: 50%;
     overflow: hidden;
     width: 100%;
     height: 0;
-    padding-bottom: 75%; /* Adjust the aspect ratio as needed */
-    box-shadow: 0 2px 40px var(--main-color); /* Add box shadow */
+    padding-bottom: 75%;
+    box-shadow: 0 2px 40px var(--main-color);
   }
   
   .grid-item img {
@@ -1111,4 +1115,4 @@ width: 50%;
   font-size: 1.8rem;
   color: var(--main-color)
 }
-/* Mobile Projects Styles */
+
