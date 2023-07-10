@@ -304,14 +304,14 @@ span {
     color: var(--main-color);
   }
 
-.about-img {
-    position: relative;
-    width: 25rem; 
-    height: 25rem;
-    border-radius: 50%;
+  .about {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    background: var(--second-bg-color);
+    padding-bottom: 6rem;
   }
 
 .about-img {
