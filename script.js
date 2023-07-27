@@ -52,15 +52,6 @@ function updateActiveItem() {
     });
 }
 
-function goToPrevItem() {
-    currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
-    updateActiveItem();
-}
-
-function goToNextItem() {
-    currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
-    updateActiveItem();
-}
 
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
@@ -68,3 +59,13 @@ function scrollToSection(sectionId) {
         section.scrollIntoView({ behavior: 'smooth' });
     }
 }
+function smoothScroll(target) {
+    const element = document.querySelector(target);
+    const offset = 80; // Adjust this value if you have a fixed navbar with a different height
+
+    window.scroll({
+      behavior: 'smooth',
+      left: 0,
+      top: element.offsetTop - offset,
+    });
+  }

@@ -793,7 +793,8 @@ width: 50%;
 .about.show-animate .animate.scroll,
 .education.show-animate .animate.scroll,
 .skills.show-animate .animate.scroll,
-.contact.show-animate .animate.scroll {
+.contact.show-animate .animate.scroll,
+.articles.show-animate {
   transition-delay: calc(.3s * var(--i));
   width: 0;
 }
@@ -1115,4 +1116,51 @@ width: 50%;
   font-size: 1.8rem;
   color: var(--main-color)
 }
+/* Define the custom variable for the second background color */
+:root {
+  --second-bg-color: #your_second_background_color_here;
+}
 
+/* Styling for the article dropdown container */
+.article-dropdown {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--second-bg-color);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the heading */
+.article-dropdown h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+}
+
+/* Styling for the paragraph */
+.article-paragraph {
+  font-size: 16px;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Styling for the dropdown menu */
+.article-dropdown select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--second-bg-color);
+}
+
+/* Styling for the dropdown menu options */
+.article-dropdown select option {
+  padding: 8px;
+  color: #333;
+  background-color: white;
+}
