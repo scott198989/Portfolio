@@ -1164,3 +1164,51 @@ width: 50%;
   color: #333;
   background-color: white;
 }
+/* Mobile styles */
+@media (max-width: 768px) {
+  /* Remove background color from heading */
+  .heading {
+    background-color: transparent;
+  }
+
+  /* Center align heading text */
+  .heading span {
+    display: block;
+    text-align: center;
+  }
+
+  /* Reduce font size of project titles */
+  .project-title {
+    font-size: 1.2rem;
+  }
+
+  /* Reduce font size of project descriptions */
+  .project-description {
+    font-size: 1rem;
+  }
+
+  /* Center align project content */
+  .grid-item-content {
+    text-align: center;
+  }
+
+  /* Remove bullet points from article dropdown */
+  .article-dropdown select {
+    list-style: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    max-width: 320px;
+    margin: 10px auto;
+    font-size: 1rem;
+  }
+
+  /* Center align article dropdown text */
+  .article-paragraph {
+    text-align: center;
+  }
+}
