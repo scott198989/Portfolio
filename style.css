@@ -1165,7 +1165,7 @@ width: 50%;
   background-color: white;
 }
 /* Mobile styles */
-@media (max-width: 768px) {
+@media (max-width: 371px) {
 
   .heading {
     background-color: transparent;
