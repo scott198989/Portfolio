@@ -1176,7 +1176,7 @@ width: 50%;
     text-align: center;
   }
 
-  .project-title {
+  .project-title, .dropdown.dropwdown {
     font-size: 1.2rem;
   }
 
