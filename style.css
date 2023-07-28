@@ -1116,12 +1116,12 @@ width: 50%;
   font-size: 1.8rem;
   color: var(--main-color)
 }
-/* Define the custom variable for the second background color */
+
 :root {
   --second-bg-color: #your_second_background_color_here;
 }
 
-/* Styling for the article dropdown container */
+
 .article-dropdown {
   max-width: 600px;
   margin: 0 auto;
@@ -1131,7 +1131,7 @@ width: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the heading */
+
 .article-dropdown h1 {
   font-size: 24px;
   font-weight: bold;
@@ -1139,7 +1139,7 @@ width: 50%;
   color: white;
 }
 
-/* Styling for the paragraph */
+
 .article-paragraph {
   font-size: 16px;
   line-height: 1.6;
@@ -1147,7 +1147,7 @@ width: 50%;
   margin-bottom: 20px;
 }
 
-/* Styling for the dropdown menu */
+
 .article-dropdown select {
   width: 100%;
   padding: 10px;
@@ -1158,7 +1158,7 @@ width: 50%;
   background-color: var(--second-bg-color);
 }
 
-/* Styling for the dropdown menu options */
+
 .article-dropdown select option {
   padding: 8px;
   color: #333;
@@ -1166,33 +1166,28 @@ width: 50%;
 }
 /* Mobile styles */
 @media (max-width: 768px) {
-  /* Remove background color from heading */
+
   .heading {
     background-color: transparent;
   }
 
-  /* Center align heading text */
   .heading span {
     display: block;
     text-align: center;
   }
 
-  /* Reduce font size of project titles */
   .project-title {
     font-size: 1.2rem;
   }
 
-  /* Reduce font size of project descriptions */
   .project-description {
     font-size: 1rem;
   }
 
-  /* Center align project content */
   .grid-item-content {
     text-align: center;
   }
 
-  /* Remove bullet points from article dropdown */
   .article-dropdown select {
     list-style: none;
     appearance: none;
@@ -1207,7 +1202,7 @@ width: 50%;
     font-size: 1rem;
   }
 
-  /* Center align article dropdown text */
+
   .article-paragraph {
     text-align: center;
   }
