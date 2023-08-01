@@ -69,3 +69,22 @@ function smoothScroll(target) {
       top: element.offsetTop - offset,
     });
   }
+// Article dropdown scroll
+  const dropdown = document.getElementById("article-dropdown");
+  let selectedIndex = dropdown.selectedIndex;
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowUp") {
+      selectedIndex = Math.max(selectedIndex - 1, 0);
+      dropdown.selectedIndex = selectedIndex;
+    } else if (event.key === "ArrowDown") {
+      selectedIndex = Math.min(selectedIndex + 1, dropdown.options.length - 1);
+      dropdown.selectedIndex = selectedIndex;
+    }
+  });
+
+
+
+
+
+
