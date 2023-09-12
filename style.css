@@ -14,7 +14,7 @@
 
 :root {
     --bg-color: #081b29;
-    --second-bg-color: #112e42;
+    --2nd-bg-color: #0b2331;
     --text-color: #ededed;
     --main-color: #00abf0;
 }
@@ -283,15 +283,6 @@ section {
     opacity: .8;
   }
 
-.about {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 2rem;
-    background: var(--main-bg-color);
-    padding-bottom: 6rem;
-  }
 
 .heading {
   position: relative;
@@ -310,7 +301,7 @@ span {
     align-items: center;
     flex-direction: column;
     gap: 2rem;
-    background: var(--second-bg-color);
+    background: var(--2nd-bg-color);
     padding-bottom: 6rem;
   }
 
@@ -469,165 +460,129 @@ span {
   padding-top: 0.5rem;
   }
 
-
-.skills {
-  min-height: auto;
-  padding-bottom: 7rem;
-  background: var(--second-bg-color);
+  .skills {
+    min-height: auto;
+    padding-bottom: 7rem;
+    background: var(--2nd-bg-color);
   }
-
-.skills h2 {
-
-  left: 50%;
-  transform: translateX(-50%);
+  
+  .skills h2 {
+    text-align: center;  /* Center the heading */
+    position: relative;  /* This might be needed depending on the rest of your CSS */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .skills .skills-row {
+    padding-left: 30vh;
+      display: flex;
+      gap: 5rem;
+  } 
+  
+  .skills-row .skills-column {
+      flex: 1;   /* Takes up equal space, flex-basis (the 40rem) is removed for simplicity */
+      width: 50%; /* Ensures each column is half the row width */
+  }
+  
+  .skills-column .title {
+      font-size: 2.5rem;
+      margin: 0 0 1.5rem;
+  }
+  
+  .skills-box .skills-content {
+      position: relative;
+      border-radius: .6rem;
+      padding: .5rem 1.5rem;
+      z-index: 1;
+      overflow: hidden;
+  }
+  
+  .skills-box .skills-content:before {  /* Corrected the typo here */
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      z-index: -1;
+      transition: .5s;
+  }
+  
+  .skills-box .skills-content:hover:before {
+      width: 100%;
+  }
+  
+  .skills-content .progress {
+      padding: 1rem 0;
+  }
+  
+  .skills-content .progress h3 {
+      font-size: 1.7rem;
+      display: flex;
+      justify-content: space-between;
+  }
+  
+  .skills-content .progress .bar {
+      height: 2.5rem;
+      border-radius: .6rem;
+      border: .2rem solid var(--main-color);
+      padding: .5rem;
+      margin: 1rem 0;
+  }
+  
+  .skills-content .progress .bar span {
+      display: block;
+      height: 100%;
+      border-radius: .3rem;
+      background: var(--main-color);
+  }
+  
+  .spacer1 {
+    margin-top: 200vh;
 }
 
-.skills .skills-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5rem;
-  } 
+.article-dropdown {
+  width: 100%;
+  margin-bottom: 20px; /* Adds some space below the dropdown */
+}
 
-.skills-row .skills-column {
-    flex: 1 1 40rem;
-  }
-
-.skills-column .title {
- 
-    font-size: 2.5rem;
-    margin: 0 0 1.5rem;
-  }
+.progress.center-content {
+  align-items: center; /* Adjust this value to your needs */
+}
 
 
+  .center-content {
+  display: flex;  
+    flex-direction: column; /* To stack the children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    height: 100%; /* Or provide a fixed height if needed */
+    margin-right: 15vh;
+}
 
-.skills-box .skills-content {
-    position: relative;
-    border: .2rem solid var(--main-color);
-    border-radius: .6rem;
-    padding: .5rem 1.5rem;
-    z-index: 1;
-    overflow: hidden;
-  }
+.container-shifted {
+  margin-right: 550px; /* You can adjust the value to your liking */
+}
 
-skills-box .skills-content:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: var(--bg-color);
-    z-index: -1;
-    transition: .5s;
-  }
+.linear {
+  white-space: nowrap;
+}
 
-.skills-box .skills-content:hover:before{
-    width: 100%;
-  }
-
-.skills-content .progress {
-    padding: 1rem 0;
-  }
-
-.skills-content .progress h3 {
-    font-size: 1.7rem;
-    display: flex;
-    justify-content: space-between;
-  }
-
-.skills-content .progress h3 span {
-    color: var(--text-color);
-  }
-
-.skills-content .progress .bar {
-    height: 2.5rem;
-    border-radius: .6rem;
-    border: .2rem solid var(--main-color);
-    padding: .5rem;
-    margin: 1rem 0;
-  }
-
-.skills-content .progress .bar span {
-    display: block;
-    height: 100%;
-    border-radius: .3rem;
-    background: var(--main-color);
-  }
-
-
-  .skills-column:nth-child(1) .skills-content .progress:nth-child(1) .bar span {
-    width: 60%;
-  }
-
-  .skills-column:nth-child(1) .skills-content .progress:nth-child(2) .bar span {
-   width: 65%;
-  }
-
-  .skills-column:nth-child(1) .skills-content .progress:nth-child(3) .bar span {
-    width: 65%;
-  }
-
-  .skills-column:nth-child(1) .skills-content .progress:nth-child(4) .bar span {
-    width: 60%;
-  }
-
-  .skills-column:nth-child(1) .skills-content .progress:nth-child(5) .bar span {
-    width: 70%;
-  }
-
-  .skills-column:nth-child(1) .skills-content .progress:nth-child(6) .bar span{
-      width: 70%;
-  }
-
-  .skills-column:nth-child(1) .skills-content .progress:nth-child(7) .bar span {
-    width: 65%;
-  }
-
-  .skills-column:nth-child(1) .skills-content .progress:nth-child(8) .bar span {
-    width: 85%;
-  }
-  .skills-column:nth-child(2) .skills-content .progress:nth-child(1) .bar span {
-    width: 75%;
-  }
-
-  .skills-column:nth-child(2) .skills-content .progress:nth-child(2) .bar span {
-    width: 90%;
-  }
-
-  .skills-column:nth-child(2) .skills-content .progress:nth-child(3) .bar span {
-    width: 85%;
-  }
-
-  .skills-column:nth-child(2) .skills-content .progress:nth-child(4) .bar span {
-    width: 90%;
-  }
-
-  .skills-column:nth-child(2) .skills-content .progress:nth-child(5) .bar span {
-    width: 90%;
-  }
-
-  .skills-column:nth-child(2) .skills-content .progress:nth-child(6) .bar span {
-    width: 95%;
-  }
-
-  .skills-column:nth-child(2) .skills-content .progress:nth-child(7) .bar span {
-    width: 95%;
-  }
-
-  .skills-column:nth-child(2) .skills-content .progress:nth-child(8) .bar span {
-    width: 85%;
-  }
-    
+.articles {
+  padding: 20rem;
+background: var(--2nd-bg-color);
+}
   .contact {
     min-height: auto;
     padding-bottom: 7rem;
   }
 
-.contact h2 {
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
+  .contact h2 {
+    display: center;
+    flex-direction: column;
+    align-items: center; /* Horizontal Centering */
 }
+
 
   .contact form {
     max-width: 70rem;
@@ -710,8 +665,50 @@ skills-box .skills-content:before {
     cursor: pointer;
   }
 
-
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem 9%;
+    background: var(--second-bg-color);
+  }
   
+
+  .footer-text p {
+    font-size: 1.6rem;
+  }
+
+  .footer-iconTop a {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .8rem;
+    background: var(--main-bg-color);
+    border: .2rem solid var(--main-bg-color);
+    border-radius: .6rem;
+  }
+
+  .footer-iconTop a:before {
+    content:'';
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 0;
+    height: 100%;
+    background: var(--second-bg-color);
+    z-index: -1;
+  }
+
+  .footer-iconTop a:hover:before {
+    width: 100%;
+  }
+
+.footer-iconTop a:hover i {
+  color: var(--main-bg-color);
+}
+
   @media (max-width: 462px) {
 
   .home-content h1 {
