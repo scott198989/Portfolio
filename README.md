@@ -35,4 +35,4 @@ Here's a quick rundown of the sections in this portfolio:
 
 I love connecting with like-minded folks. So, if you have questions, want to drop some comments, or simply want to chat, don't hesitate. You know where to find me!
 
-Catch more of my work and connect with me on [LinkedIn](https://www.linkedin/in/scott-tuschl).
+Catch more of my work and connect with me on [LinkedIn](https://linkedin.com/in/scott-tuschl/).
