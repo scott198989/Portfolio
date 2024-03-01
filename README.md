@@ -26,7 +26,8 @@ If you're geeky and want to run this on your machine, here's how:
 Here's a quick rundown of the sections in this portfolio:
 
 - About Me
-- Projects
+- Skills
+- Education
 - Resume
 - Contact Info
 
@@ -34,4 +35,4 @@ Here's a quick rundown of the sections in this portfolio:
 
 I love connecting with like-minded folks. So, if you have questions, want to drop some comments, or simply want to chat, don't hesitate. You know where to find me!
 
-Catch more of my work and connect with me on [LinkedIn](link-to-your-linkedin).
+Catch more of my work and connect with me on [LinkedIn](https://www.linkedin/in/scott-tuschl).
