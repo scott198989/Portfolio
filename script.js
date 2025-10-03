@@ -149,6 +149,15 @@ const Timeline = ({ items }) => (
   </div>
 );
 
+const navItems = [
+  { id: 'hero', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'journey', label: 'Journey' },
+  { id: 'expertise', label: 'Expertise' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+];
+
 const metrics = [
   { label: 'Hours in technical labs', value: '350+' },
   { label: 'Cross-functional initiatives led', value: '18' },
@@ -244,7 +253,10 @@ const credentials = [
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState('hero');
-  const sections = ['hero', 'about', 'journey', 'expertise', 'projects', 'contact'];
+  const sections = useMemo(() => {
+    const ids = ['hero', ...navItems.map((item) => item.id)];
+    return Array.from(new Set(ids));
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -274,8 +286,25 @@ const App = () => {
         setMenuOpen(false);
       }
     };
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', menuOpen);
+    return () => document.body.classList.remove('menu-open');
   }, [menuOpen]);
 
   const scrollToSection = (id) => {
@@ -283,6 +312,9 @@ const App = () => {
     if (!target) return;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+    if (window.history?.replaceState) {
+      window.history.replaceState(null, '', `#${id}`);
+    }
     setMenuOpen(false);
   };
 
@@ -295,31 +327,52 @@ const App = () => {
           </a>
           <button
             type="button"
-            className="menu-toggle"
+            className={`menu-toggle${menuOpen ? ' open' : ''}`}
             aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
             onClick={() => setMenuOpen((prev) => !prev)}
           >
-            ☰
+            <span />
+            <span />
+            <span />
           </button>
-          <nav className={menuOpen ? 'open' : ''}>
-            {sections.map((section) => (
-              <a
-                key={section}
-                href={`#${section}`}
-                className={activeId === section ? 'active' : ''}
-                onClick={(event) => {
-                  event.preventDefault();
-                  scrollToSection(section);
-                }}
-              >
-                {section === 'hero' ? 'Home' : section.charAt(0).toUpperCase() + section.slice(1)}
+          <nav id="primary-navigation" className={`nav-links${menuOpen ? ' open' : ''}`} aria-label="Primary navigation">
+            <ul>
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    className={activeId === item.id ? 'active' : ''}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      scrollToSection(item.id);
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="nav-actions">
+              <button type="button" className="nav-cta" onClick={() => scrollToSection('contact')}>
+                Let’s collaborate
+              </button>
+              <a className="nav-cta outline" href="mailto:scott.tuschl@gmail.com">
+                Email Scott
               </a>
-            ))}
+            </div>
           </nav>
         </div>
       </header>
+      <div className={`nav-overlay${menuOpen ? ' visible' : ''}`} aria-hidden={!menuOpen} onClick={() => setMenuOpen(false)} />
       <main>
         <section id="hero" className="hero">
+          <div className="hero-background" aria-hidden="true">
+            <span className="hero-aurora hero-aurora--one" />
+            <span className="hero-aurora hero-aurora--two" />
+            <span className="hero-grid" />
+          </div>
           <div className="hero-inner">
             <div className="hero-copy">
               <div className="badge">Process Engineer in the Making</div>
