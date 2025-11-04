@@ -187,7 +187,7 @@ export default function Journey() {
             </div>
             <div className="space-y-8">
               {education.map((item, index) => (
-                <TimelineItem key={item.school} item={item} index={index} type="education" />
+                <TimelineItem key={`${item.school}-${index}`} item={item} index={index} type="education" />
               ))}
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function Journey() {
             </div>
             <div className="space-y-8">
               {experience.map((item, index) => (
-                <TimelineItem key={item.company} item={item} index={index} type="experience" />
+                <TimelineItem key={`${item.company}-${index}`} item={item} index={index} type="experience" />
               ))}
             </div>
           </div>
