@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, Cpu, Zap, Target, Award } from 'lucide-react';
 import { Button } from './ui/button';
-import dynamic from 'next/dynamic';
 
-const Hero3DScene = dynamic(() => import('./hero-3d-scene'), {
-  ssr: false,
-  loading: () => <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />,
-});
+// 3D Scene removed for performance - can be added back later if needed
+// const Hero3DScene = dynamic(() => import('./hero-3d-scene'), {
+//   ssr: false,
+//   loading: () => <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />,
+// });
 
 const stats = [
   { icon: Cpu, value: '350+', label: 'Engineering Hours' },
@@ -24,8 +24,9 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* 3D Background */}
-      <Hero3DScene />
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background" />
 
       {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />
