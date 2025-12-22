@@ -1,78 +1,99 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
-import { Suspense, useState, useEffect } from 'react';
-import { Float, OrbitControls } from '@react-three/drei';
-import ErrorBoundary from '../ErrorBoundary';
-import GearMesh from '../3d/GearMesh';
-
-function SkillsScene() {
-  return (
-    <>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} intensity={1} color="#00d4ff" />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#3b82f6" />
-
-      <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-        <group>
-          <GearMesh position={[0, 0, 0]} scale={0.8} color="#00d4ff" teeth={16} speed={0.3} />
-          <GearMesh position={[1.4, 0.6, 0]} scale={0.5} color="#06b6d4" teeth={12} speed={0.4} reverse />
-          <GearMesh position={[-1.2, -0.8, 0]} scale={0.4} color="#0ea5e9" teeth={10} speed={0.5} />
-        </group>
-      </Float>
-
-      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={1} />
-    </>
-  );
-}
-
-function isWebGLAvailable(): boolean {
-  if (typeof window === 'undefined') return false;
-  try {
-    const canvas = document.createElement('canvas');
-    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
-  } catch {
-    return false;
-  }
-}
-
-function StaticFallback() {
-  return (
-    <div className="w-full h-full min-h-[300px] bg-gradient-to-br from-cyan-500/10 to-blue-600/10 rounded-lg flex items-center justify-center">
-      <div className="text-cyan-400/40 text-5xl animate-pulse">⚙️</div>
-    </div>
-  );
-}
+import { useEffect, useState } from 'react';
 
 export default function SkillsCanvas() {
   const [mounted, setMounted] = useState(false);
-  const [webglSupported, setWebglSupported] = useState(true);
 
   useEffect(() => {
     setMounted(true);
-    setWebglSupported(isWebGLAvailable());
   }, []);
 
-  if (!mounted || !webglSupported) {
-    return <StaticFallback />;
-  }
-
   return (
-    <ErrorBoundary fallback={<StaticFallback />}>
-      <Canvas
-        camera={{ position: [0, 0, 4], fov: 50 }}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference: 'high-performance',
-          failIfMajorPerformanceCaveat: false,
-        }}
-        fallback={<StaticFallback />}
-      >
-        <Suspense fallback={null}>
-          <SkillsScene />
-        </Suspense>
-      </Canvas>
-    </ErrorBoundary>
+    <div className="w-full h-full min-h-[300px] relative overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg">
+      {/* Animated gears */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        {/* Main gear */}
+        <div className="relative">
+          <svg
+            className="w-32 h-32 text-cyan-400/40 animate-spin-slow"
+            viewBox="0 0 100 100"
+            fill="currentColor"
+          >
+            <path d="M50 30a20 20 0 100 40 20 20 0 000-40zm0 30a10 10 0 110-20 10 10 0 010 20z" />
+            {[...Array(8)].map((_, i) => (
+              <rect
+                key={i}
+                x="46"
+                y="5"
+                width="8"
+                height="15"
+                rx="2"
+                transform={`rotate(${i * 45} 50 50)`}
+              />
+            ))}
+          </svg>
+
+          {/* Secondary gear */}
+          <svg
+            className="absolute -right-8 -top-4 w-16 h-16 text-blue-400/40 animate-spin-reverse"
+            viewBox="0 0 100 100"
+            fill="currentColor"
+          >
+            <path d="M50 35a15 15 0 100 30 15 15 0 000-30zm0 22a7 7 0 110-14 7 7 0 010 14z" />
+            {[...Array(6)].map((_, i) => (
+              <rect
+                key={i}
+                x="46"
+                y="10"
+                width="8"
+                height="12"
+                rx="2"
+                transform={`rotate(${i * 60} 50 50)`}
+              />
+            ))}
+          </svg>
+
+          {/* Third gear */}
+          <svg
+            className="absolute -left-6 -bottom-6 w-12 h-12 text-cyan-300/40 animate-spin-medium"
+            viewBox="0 0 100 100"
+            fill="currentColor"
+          >
+            <path d="M50 35a15 15 0 100 30 15 15 0 000-30zm0 22a7 7 0 110-14 7 7 0 010 14z" />
+            {[...Array(6)].map((_, i) => (
+              <rect
+                key={i}
+                x="46"
+                y="10"
+                width="8"
+                height="12"
+                rx="2"
+                transform={`rotate(${i * 60} 50 50)`}
+              />
+            ))}
+          </svg>
+        </div>
+      </div>
+
+      {/* Glow effect */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" />
+
+      {/* Circuit lines */}
+      {mounted && (
+        <svg className="absolute inset-0 w-full h-full opacity-20">
+          <defs>
+            <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#00d4ff" stopOpacity="0" />
+              <stop offset="50%" stopColor="#00d4ff" stopOpacity="1" />
+              <stop offset="100%" stopColor="#00d4ff" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="30%" x2="30%" y2="30%" stroke="url(#circuit-gradient)" strokeWidth="1" className="animate-circuit-1" />
+          <line x1="70%" y1="70%" x2="100%" y2="70%" stroke="url(#circuit-gradient)" strokeWidth="1" className="animate-circuit-2" />
+          <line x1="20%" y1="0" x2="20%" y2="25%" stroke="url(#circuit-gradient)" strokeWidth="1" className="animate-circuit-3" />
+        </svg>
+      )}
+    </div>
   );
 }
