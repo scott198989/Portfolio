@@ -33,7 +33,10 @@ class GlobalErrorBoundary extends Component<Props, State> {
             <div className="text-6xl mb-4">⚠️</div>
             <h1 className="text-2xl font-bold text-white mb-2">Something went wrong</h1>
             <p className="text-gray-400 mb-4">
-              The 3D components failed to load. Please try refreshing the page.
+              An unexpected error occurred. Please try refreshing the page or clearing your browser cache.
+            </p>
+            <p className="text-gray-500 text-sm mb-4">
+              Error: {this.state.error?.message || 'Unknown error'}
             </p>
             <button
               onClick={() => window.location.reload()}
