@@ -36,6 +36,9 @@
     "eslint": "^8",
     "eslint-config-next": "^15.0.3"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "http://local_proxy@127.0.0.1:62019/git/scott198989/Portfolio"
