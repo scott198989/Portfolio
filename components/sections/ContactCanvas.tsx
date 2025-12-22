@@ -9,32 +9,38 @@ const SPARKLE_POSITIONS = [
   { left: 85, top: 55 }, { left: 25, top: 85 }, { left: 60, top: 15 },
 ];
 
+// Static version - safe for all devices
+function StaticGear() {
+  return (
+    <div className="w-full h-full relative overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <svg className="w-20 h-20 text-cyan-400/40" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M50 30a20 20 0 100 40 20 20 0 000-40zm0 30a10 10 0 110-20 10 10 0 010 20z" />
+          {[...Array(10)].map((_, i) => (
+            <rect key={i} x="46" y="5" width="8" height="12" rx="2" transform={`rotate(${i * 36} 50 50)`} />
+          ))}
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 export default function ContactCanvas() {
   const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // Default to mobile (safe)
 
   useEffect(() => {
+    const mobile = isMobileDevice();
+    setIsMobile(mobile);
     setMounted(true);
-    setIsMobile(isMobileDevice());
   }, []);
 
-  // Mobile: simplified static version
-  if (mounted && isMobile) {
-    return (
-      <div className="w-full h-full relative overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <svg className="w-20 h-20 text-cyan-400/40" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M50 30a20 20 0 100 40 20 20 0 000-40zm0 30a10 10 0 110-20 10 10 0 010 20z" />
-            {[...Array(10)].map((_, i) => (
-              <rect key={i} x="46" y="5" width="8" height="12" rx="2" transform={`rotate(${i * 36} 50 50)`} />
-            ))}
-          </svg>
-        </div>
-      </div>
-    );
+  // Before mount OR on mobile: show static safe version
+  if (!mounted || isMobile) {
+    return <StaticGear />;
   }
 
-  // Desktop: full animated version
+  // Desktop only: full animated version
   return (
     <div className="w-full h-full relative overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg">
       <div className="absolute top-1/4 left-1/4 w-24 h-24 bg-cyan-500/20 rounded-full blur-2xl animate-float-slow" />
@@ -65,7 +71,7 @@ export default function ContactCanvas() {
         </div>
       </div>
 
-      {mounted && SPARKLE_POSITIONS.map((pos, i) => (
+      {SPARKLE_POSITIONS.map((pos, i) => (
         <div
           key={i}
           className="absolute w-1 h-1 bg-cyan-400/60 rounded-full animate-twinkle"
