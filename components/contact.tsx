@@ -217,7 +217,7 @@ export default function Contact() {
           className="text-center mt-16 pt-8 border-t border-border"
         >
           <p className="text-sm text-muted-foreground">
-            © 2025 Scott Tuschl. Built with Next.js, React, and Three.js.
+            © {new Date().getFullYear()} Scott Tuschl. Built with Next.js, React, and Framer Motion.
           </p>
           <p className="text-xs text-muted-foreground mt-2">
             Designed for impact. Engineered for excellence.

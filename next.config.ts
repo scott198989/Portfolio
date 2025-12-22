@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
   basePath: process.env.VERCEL ? undefined : '',
   trailingSlash: process.env.VERCEL ? undefined : true,
   reactStrictMode: true,
-  transpilePackages: ['three'],
 };
 
 export default nextConfig;
