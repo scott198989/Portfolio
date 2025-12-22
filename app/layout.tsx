@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://scott-tuschl.com'),
   title: 'Scott Tuschl | Mechatronics Engineering Technology',
   description: 'Portfolio of Scott Tuschl - Mechatronics Engineering Technology Student, Lab Technician, and Aspiring Process Engineer. Passionate about automation, AI integration, and manufacturing excellence.',
   keywords: [
