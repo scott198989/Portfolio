@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Premium portfolio website showcasing mechatronics engineering excellence",
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^15.0.3",
+    "next": "^16.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "framer-motion": "^11.11.17",
@@ -34,7 +34,7 @@
     "postcss": "^8",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "^15.0.3"
+    "eslint-config-next": "^16.1.0"
   },
   "engines": {
     "node": ">=20.0.0"
