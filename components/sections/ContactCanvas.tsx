@@ -27,27 +27,39 @@ function ContactScene() {
   );
 }
 
+function isWebGLAvailable(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+  } catch {
+    return false;
+  }
+}
+
+function StaticFallback() {
+  return (
+    <div className="w-full h-full bg-gradient-to-br from-cyan-500/10 to-blue-600/10 rounded-lg flex items-center justify-center">
+      <div className="text-cyan-400/40 text-4xl animate-pulse">⚙️</div>
+    </div>
+  );
+}
+
 export default function ContactCanvas() {
   const [mounted, setMounted] = useState(false);
+  const [webglSupported, setWebglSupported] = useState(true);
 
   useEffect(() => {
     setMounted(true);
+    setWebglSupported(isWebGLAvailable());
   }, []);
 
-  if (!mounted) {
-    return (
-      <div className="w-full h-full bg-gradient-to-br from-cyan-500/5 to-blue-600/5 rounded-lg" />
-    );
+  if (!mounted || !webglSupported) {
+    return <StaticFallback />;
   }
 
   return (
-    <ErrorBoundary
-      fallback={
-        <div className="w-full h-full bg-gradient-to-br from-cyan-500/10 to-blue-600/10 rounded-lg flex items-center justify-center">
-          <div className="text-cyan-400/50 text-4xl animate-pulse">⚙️</div>
-        </div>
-      }
-    >
+    <ErrorBoundary fallback={<StaticFallback />}>
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50 }}
         gl={{
@@ -56,6 +68,7 @@ export default function ContactCanvas() {
           powerPreference: 'high-performance',
           failIfMajorPerformanceCaveat: false,
         }}
+        fallback={<StaticFallback />}
       >
         <Suspense fallback={null}>
           <ContactScene />
