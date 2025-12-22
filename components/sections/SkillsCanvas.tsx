@@ -1,8 +1,9 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { Float, OrbitControls } from '@react-three/drei';
+import ErrorBoundary from '../ErrorBoundary';
 import GearMesh from '../3d/GearMesh';
 
 function SkillsScene() {
@@ -26,11 +27,39 @@ function SkillsScene() {
 }
 
 export default function SkillsCanvas() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="w-full h-full min-h-[300px] bg-gradient-to-br from-cyan-500/5 to-blue-600/5 rounded-lg" />
+    );
+  }
+
   return (
-    <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
-      <Suspense fallback={null}>
-        <SkillsScene />
-      </Suspense>
-    </Canvas>
+    <ErrorBoundary
+      fallback={
+        <div className="w-full h-full min-h-[300px] bg-gradient-to-br from-cyan-500/10 to-blue-600/10 rounded-lg flex items-center justify-center">
+          <div className="text-cyan-400/50 text-4xl animate-pulse">⚙️</div>
+        </div>
+      }
+    >
+      <Canvas
+        camera={{ position: [0, 0, 4], fov: 50 }}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: 'high-performance',
+          failIfMajorPerformanceCaveat: false,
+        }}
+      >
+        <Suspense fallback={null}>
+          <SkillsScene />
+        </Suspense>
+      </Canvas>
+    </ErrorBoundary>
   );
 }
