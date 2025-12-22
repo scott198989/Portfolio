@@ -6,7 +6,6 @@ import { ExternalLink, Github, Zap, TrendingUp, Network, Clock, DollarSign, Acti
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import Image from 'next/image';
 
 const projects = [
   {
@@ -19,7 +18,7 @@ const projects = [
       { icon: Zap, label: '15% throughput increase', color: 'text-purple-400' },
     ],
     technologies: ['React', 'Node.js', 'MongoDB', 'Data Analytics'],
-    image: '/assets/tictactoe.png',
+    // image: '/assets/tictactoe.png', // TODO: Add project screenshot
     featured: true,
   },
   {
@@ -32,7 +31,7 @@ const projects = [
       { icon: DollarSign, label: '$240K cost avoidance', color: 'text-purple-400' },
     ],
     technologies: ['Python', 'TensorFlow', 'Pandas', 'SQL', 'Power BI'],
-    image: '/assets/travelogue.png',
+    // image: '/assets/travelogue.png', // TODO: Add project screenshot
     featured: true,
   },
   {
@@ -99,17 +98,6 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       className={project.featured ? 'lg:col-span-2' : ''}
     >
       <Card className="h-full glass-strong hover:glass transition-all duration-300 group hover:scale-105 overflow-hidden">
-        {project.image && project.featured && (
-          <div className="relative h-48 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10" />
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-300"
-            />
-          </div>
-        )}
         <CardHeader>
           <div className="space-y-2">
             <Badge variant="glow" className="w-fit">
