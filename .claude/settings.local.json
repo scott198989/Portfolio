@@ -4,7 +4,10 @@
       "Bash(git commit --allow-empty -m \"$\\(cat <<''EOF''\nchore: trigger Vercel redeploy\n\nPrevious commits including CSS animation fixes were not deployed to Vercel.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git push)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx next build:*)",
+      "Bash(npm install)"
     ]
   }
 }
