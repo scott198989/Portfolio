@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { GraduationCap, Briefcase, Target, Zap, Cog, Bot, Factory, Brain } from 'lucide-react';
+import { GraduationCap, Target, Zap, Cog, Bot, Factory, Brain } from 'lucide-react';
 
 const highlights = [
   {

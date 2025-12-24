@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ExternalLink, Github, Cpu, Database, Globe, Wrench, Clock, CheckCircle } from 'lucide-react';
+import { ExternalLink, Github, Cpu, Database, Globe, Clock, CheckCircle } from 'lucide-react';
 
 interface Project {
   title: string;
