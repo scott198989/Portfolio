@@ -91,14 +91,14 @@ export default function Contact() {
             Get In Touch
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Let's{' '}
+            Let&apos;s{' '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               Connect
             </span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Interested in discussing process engineering, automation projects, or potential opportunities?
-            I'd love to hear from you.
+            I&apos;d love to hear from you.
           </p>
         </motion.div>
 

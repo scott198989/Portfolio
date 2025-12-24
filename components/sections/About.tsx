@@ -86,7 +86,7 @@ export default function About() {
             <motion.div variants={itemVariants} className="space-y-6">
               <p className="text-lg text-gray-300 leading-relaxed">
                 As a <span className="text-cyan-400 font-semibold">Mechatronics Engineering Technology</span> student
-                with a strong academic record, I'm passionate about bridging the gap between mechanical systems,
+                with a strong academic record, I&apos;m passionate about bridging the gap between mechanical systems,
                 electronics, and intelligent automation.
               </p>
               <p className="text-lg text-gray-400 leading-relaxed">
@@ -98,7 +98,7 @@ export default function About() {
               <p className="text-lg text-gray-400 leading-relaxed">
                 My vision is to leverage <span className="text-cyan-400">artificial intelligence</span> and
                 modern automation technologies to optimize manufacturing processes, improve efficiency, and
-                push the boundaries of what's possible in industrial engineering.
+                push the boundaries of what&apos;s possible in industrial engineering.
               </p>
 
               {/* Interest tags */}
