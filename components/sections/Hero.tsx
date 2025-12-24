@@ -70,13 +70,11 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
           <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/resume"
             className="flex items-center gap-2 px-8 py-4 border border-gray-700 rounded-lg font-semibold text-gray-300 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 hover:bg-cyan-400/5"
           >
             <Download size={20} />
-            Download Resume
+            View Resume
           </a>
         </motion.div>
 

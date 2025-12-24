@@ -3,15 +3,8 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
 import { MapPin, Linkedin, Github, Send, CheckCircle, Loader2 } from 'lucide-react';
-
-const ContactCanvas = dynamic(() => import('./ContactCanvas'), {
-  ssr: false,
-  loading: () => (
-    <div className="h-64 bg-gradient-to-br from-cyan-500/5 to-blue-600/5 rounded-lg" />
-  ),
-});
+import GitHubActivity from './GitHubActivity';
 
 const contactInfo = [
   {
@@ -98,10 +91,8 @@ export default function Contact() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* 3D Scene */}
-            <div className="h-64 rounded-2xl overflow-hidden bg-gray-900/50 border border-gray-800">
-              <ContactCanvas />
-            </div>
+            {/* GitHub Activity */}
+            <GitHubActivity />
 
             {/* Contact Info Cards */}
             <div className="grid grid-cols-2 gap-4">

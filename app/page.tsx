@@ -14,6 +14,10 @@ const About = dynamic(() => import('@/components/sections/About'), {
   ssr: false,
 });
 
+const Stats = dynamic(() => import('@/components/sections/Stats'), {
+  ssr: false,
+});
+
 const Skills = dynamic(() => import('@/components/sections/Skills'), {
   ssr: false,
 });
@@ -51,6 +55,7 @@ export default function Home() {
         <Navigation />
         <Hero />
         <About />
+        <Stats />
         <Skills />
         <Experience />
         <Projects />
