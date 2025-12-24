@@ -22,6 +22,78 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: 'Multi-Agent Orchestrator',
+    description: 'AI agent coordination framework',
+    longDescription: 'Framework demonstrating AI agent coordination for complex engineering problems. A conductor agent analyzes problems, routes to specialized agents (Controls, Process, Systems, Pragmatist), and synthesizes responses. Includes token tracking and cost estimation.',
+    tags: ['AI/ML', 'Multi-Agent', 'React', 'Architecture'],
+    category: 'automation',
+    status: 'production',
+    statusText: 'Live Demo',
+    links: {
+      live: 'https://multi-agent-orchestrator-framework.vercel.app/',
+    },
+    features: [
+      'Multi-agent architecture design',
+      'Specialized domain agents',
+      'Token tracking & cost estimation',
+      'Practical orchestration patterns',
+    ],
+  },
+  {
+    title: 'PlainSpeak Query Interface',
+    description: 'Natural language to SQL for manufacturing',
+    longDescription: 'Natural language interface for manufacturing data. Ask questions in plain English, get answers with the generated SQL visible. Built on a simulated 30-day production database covering scrap rates, downtime, OEE, and quality metrics.',
+    tags: ['NL-to-SQL', 'AI/ML', 'Manufacturing', 'React'],
+    category: 'automation',
+    status: 'production',
+    statusText: 'Live Demo',
+    links: {
+      live: 'https://plain-speak-query-interface.vercel.app/',
+    },
+    features: [
+      'Natural language queries',
+      'Transparent SQL generation',
+      'Manufacturing KPI database',
+      'Data democratization',
+    ],
+  },
+  {
+    title: 'SensorSim Anomaly Detector',
+    description: 'Predictive maintenance dashboard',
+    longDescription: 'Real-time predictive maintenance dashboard using simulated industrial sensor data. Detects equipment anomalies through statistical analysis (Z-score), predicts failure timelines, and allows fault injection for training scenarios.',
+    tags: ['Predictive Maintenance', 'React', 'Analytics', 'HMI'],
+    category: 'automation',
+    status: 'production',
+    statusText: 'Live Demo',
+    links: {
+      live: 'https://sensor-sim-anomaly-detector.vercel.app/',
+    },
+    features: [
+      'Real-time sensor simulation',
+      'Z-score anomaly detection',
+      'Failure prediction',
+      'Industrial HMI design',
+    ],
+  },
+  {
+    title: 'ParameterPath Optimizer',
+    description: 'Blown film extrusion expert system',
+    longDescription: 'Expert system for blown film extrusion parameter recommendations and defect diagnosis. Input material and targets, get processing parameters. Input a defect, get ranked probable causes with corrective actions. Rules-based for explainability and safety.',
+    tags: ['Expert System', 'Manufacturing', 'React', 'Rules Engine'],
+    category: 'automation',
+    status: 'production',
+    statusText: 'Live Demo',
+    links: {
+      live: 'https://parameter-path-optimizer.vercel.app/',
+    },
+    features: [
+      'Parameter recommendations',
+      'Defect diagnosis',
+      'Explainable rules-based AI',
+      'Manufacturing safety focus',
+    ],
+  },
+  {
     title: 'ISOFlex Assistant',
     description: 'AI-powered assistant for manufacturers',
     longDescription: 'An AI-powered assistant system designed for mid-size manufacturers who need custom AI solutions but lack dedicated technical teams. Integrates with existing manufacturing workflows to provide intelligent automation and decision support.',
@@ -260,7 +332,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Projects grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project, index) => (
             <ProjectCard key={project.title} project={project} index={index} />
           ))}
