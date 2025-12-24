@@ -125,17 +125,20 @@ const projects: Project[] = [
   },
   {
     title: 'NCM Analytics Dashboard',
-    description: 'Real-time manufacturing analytics',
-    longDescription: 'Real-time analytics dashboard for manufacturing operations, providing visibility into non-conforming material metrics and production efficiency. Migrated from legacy SharePoint to modern cloud infrastructure.',
-    tags: ['React', 'Cloudflare Workers', 'D1 Database', 'Analytics'],
+    description: 'Production quality management system',
+    longDescription: 'Production-deployed quality management dashboard tracking non-conformance data from a live manufacturing environment. Syncs with SharePoint via Power Automate, stores in Cloudflare D1, serves through Workers backend. Built for actual daily use by quality and operations teams.',
+    tags: ['React', 'Cloudflare Workers', 'D1 Database', 'Power Automate'],
     category: 'software',
     status: 'production',
-    statusText: 'Deployed',
+    statusText: 'Production',
+    links: {
+      live: 'https://iso-flex-dashboard.vercel.app/login',
+    },
     features: [
-      'Real-time NCM tracking',
-      'Production efficiency metrics',
-      'Cloud-native architecture',
-      'Legacy system migration',
+      'Live manufacturing data sync',
+      'Real-time filtering & trends',
+      'Defect distribution analysis',
+      'Daily use by QA teams',
     ],
   },
   {
