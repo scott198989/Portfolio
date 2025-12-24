@@ -24,7 +24,7 @@ const highlights = [
   {
     icon: Brain,
     title: 'AI Integration',
-    description: 'Future Focus Area',
+    description: 'Current Focus',
   },
 ];
 

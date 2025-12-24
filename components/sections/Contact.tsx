@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Mail, Phone, MapPin, Linkedin, Github, Send, CheckCircle, Loader2 } from 'lucide-react';
+import { MapPin, Linkedin, Github, Send, CheckCircle, Loader2 } from 'lucide-react';
 
 const ContactCanvas = dynamic(() => import('./ContactCanvas'), {
   ssr: false,
@@ -14,18 +14,6 @@ const ContactCanvas = dynamic(() => import('./ContactCanvas'), {
 });
 
 const contactInfo = [
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'scott-tuschl@comcast.net',
-    href: 'mailto:scott-tuschl@comcast.net',
-  },
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: '(615) 559-2896',
-    href: 'tel:+16155592896',
-  },
   {
     icon: MapPin,
     label: 'Location',
@@ -282,7 +270,7 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
             <p>&copy; {new Date().getFullYear()} Scott Tuschl. All rights reserved.</p>
-            <p>Built with React, Three.js & Tailwind CSS</p>
+            <p>Built with React, Next.js & Tailwind CSS</p>
           </div>
         </div>
       </div>

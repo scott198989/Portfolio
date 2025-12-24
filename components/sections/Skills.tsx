@@ -3,63 +3,44 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import dynamic from 'next/dynamic';
+import { Wrench, Code, Cog } from 'lucide-react';
 
-const SkillsCanvas = dynamic(() => import('./SkillsCanvas'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex-1 min-h-[300px] bg-gradient-to-br from-cyan-500/5 to-blue-600/5 rounded-lg" />
-  ),
-});
-
-const technicalSkills = [
-  { name: 'Machine Operation', level: 95 },
-  { name: 'Troubleshooting', level: 90 },
-  { name: 'Process Optimization', level: 85 },
-  { name: 'Quality Control', level: 90 },
-  { name: 'Light Electrical', level: 80 },
-  { name: 'Light Hydraulics', level: 80 },
-  { name: 'PLC Programming', level: 70 },
-  { name: 'CAD/Technical Drawing', level: 75 },
+const operateSkills = [
+  'Machine Operation',
+  'Troubleshooting & Diagnostics',
+  'Process Optimization',
+  'Quality Control',
+  'PLC Programming',
+  'Light Electrical',
+  'Light Hydraulics',
+  'CAD/Technical Drawing',
 ];
 
-const softwareSkills = [
-  { name: 'Python', level: 70 },
-  { name: 'JavaScript/React', level: 75 },
-  { name: 'Ruby on Rails', level: 70 },
-  { name: 'SQL/Databases', level: 65 },
-  { name: 'Git/Version Control', level: 80 },
-  { name: 'Linux/CLI', level: 75 },
+const buildSkills = [
+  'Python',
+  'JavaScript/React',
+  'Ruby on Rails',
+  'SQL/Databases',
+  'Git/Version Control',
+  'Linux/CLI',
+  'AI/ML Systems',
+  'Custom LLMs',
 ];
 
-const certifications = [
-  'Full Stack Web Development - LEARN Academy',
-  'LAN/WAN Network Installation - US Army Signal Corps',
-  'NCO Leadership Certification - US Army',
-  '5S Methodology',
-  'Lock Out Tag Out (LOTO)',
-  'Forklift Certified',
-];
-
-function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
-
+function SkillItem({ skill, index, color }: { skill: string; index: number; color: 'cyan' | 'blue' }) {
   return (
-    <div ref={ref} className="space-y-2">
-      <div className="flex justify-between items-center">
-        <span className="text-sm font-medium text-gray-300">{name}</span>
-        <span className="text-sm text-cyan-400">{level}%</span>
-      </div>
-      <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1, delay: delay, ease: 'easeOut' }}
-        />
-      </div>
-    </div>
+    <motion.div
+      className="flex items-center gap-3 p-3 bg-gray-800/30 border border-gray-800 rounded-lg hover:border-gray-700 hover:bg-gray-800/50 transition-all duration-300 group"
+      initial={{ opacity: 0, x: color === 'cyan' ? -20 : 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+    >
+      <div
+        className="w-2 h-2 rounded-full group-hover:scale-125 transition-transform"
+        style={{ backgroundColor: color === 'cyan' ? '#22d3ee' : '#60a5fa' }}
+      />
+      <span className="text-gray-300 group-hover:text-white transition-colors">{skill}</span>
+    </motion.div>
   );
 }
 
@@ -88,7 +69,7 @@ export default function Skills() {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -107,85 +88,55 @@ export default function Skills() {
             </h2>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Technical Skills */}
+          {/* Two Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* What I Operate Column */}
             <motion.div
               variants={itemVariants}
-              className="p-6 bg-gray-900/50 border border-gray-800 rounded-2xl"
+              className="p-8 bg-gray-900/50 border border-gray-800 rounded-2xl"
             >
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-cyan-400 rounded-full" />
-                Technical Skills
-              </h3>
-              <div className="space-y-4">
-                {technicalSkills.map((skill, index) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                    delay={index * 0.1}
-                  />
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-12 flex items-center justify-center bg-cyan-400/10 rounded-xl">
+                  <Wrench className="w-6 h-6 text-cyan-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">What I Operate</h3>
+              </div>
+              <div className="grid gap-3">
+                {operateSkills.map((skill, index) => (
+                  <SkillItem key={skill} skill={skill} index={index} color="cyan" />
                 ))}
               </div>
             </motion.div>
 
-            {/* 3D Visualization */}
+            {/* What I Build Column */}
             <motion.div
               variants={itemVariants}
-              className="p-6 bg-gray-900/50 border border-gray-800 rounded-2xl flex flex-col"
+              className="p-8 bg-gray-900/50 border border-gray-800 rounded-2xl"
             >
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-400 rounded-full" />
-                Engineering Focus
-              </h3>
-              <div className="flex-1 min-h-[300px]">
-                <SkillsCanvas />
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-12 flex items-center justify-center bg-blue-400/10 rounded-xl">
+                  <Code className="w-6 h-6 text-blue-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">What I Build</h3>
               </div>
-              <p className="text-sm text-gray-400 text-center mt-4">
-                Precision engineering meets modern automation
-              </p>
-            </motion.div>
-
-            {/* Software Skills */}
-            <motion.div
-              variants={itemVariants}
-              className="p-6 bg-gray-900/50 border border-gray-800 rounded-2xl"
-            >
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-purple-400 rounded-full" />
-                Software & Programming
-              </h3>
-              <div className="space-y-4 mb-8">
-                {softwareSkills.map((skill, index) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                    delay={index * 0.1}
-                  />
+              <div className="grid gap-3">
+                {buildSkills.map((skill, index) => (
+                  <SkillItem key={skill} skill={skill} index={index} color="blue" />
                 ))}
               </div>
             </motion.div>
           </div>
 
-          {/* Certifications */}
+          {/* Center Gear Graphic */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 p-6 bg-gray-900/50 border border-gray-800 rounded-2xl"
+            className="flex justify-center mt-12"
           >
-            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-400 rounded-full" />
-              Certifications & Training
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {certifications.map((cert) => (
-                <span
-                  key={cert}
-                  className="px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-sm text-gray-300 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300"
-                >
-                  {cert}
-                </span>
-              ))}
+            <div className="relative">
+              <div className="w-20 h-20 flex items-center justify-center bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full border border-gray-800">
+                <Cog className="w-10 h-10 text-cyan-400/60 animate-spin-very-slow" />
+              </div>
+              <div className="absolute -inset-4 border border-gray-800 rounded-full animate-pulse opacity-30" />
             </div>
           </motion.div>
         </motion.div>

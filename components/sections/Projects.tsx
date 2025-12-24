@@ -3,15 +3,16 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ExternalLink, Github, ChevronLeft, ChevronRight, Cpu, Database, Globe, Wrench } from 'lucide-react';
+import { ExternalLink, Github, Cpu, Database, Globe, Wrench, Clock, CheckCircle } from 'lucide-react';
 
 interface Project {
   title: string;
   description: string;
   longDescription: string;
-  image: string;
   tags: string[];
   category: 'engineering' | 'software' | 'automation';
+  status: 'development' | 'production';
+  statusText: string;
   links?: {
     live?: string;
     github?: string;
@@ -21,40 +22,58 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'Process Monitoring Dashboard',
-    description: 'Real-time manufacturing analytics platform',
-    longDescription: 'A comprehensive dashboard for monitoring blown film extrusion processes, featuring real-time data visualization, anomaly detection, and predictive maintenance alerts.',
-    image: '/projects/dashboard.png',
-    tags: ['React', 'Python', 'PostgreSQL', 'Real-time Data'],
+    title: 'ISOFlex Assistant',
+    description: 'AI-powered assistant for manufacturers',
+    longDescription: 'An AI-powered assistant system designed for mid-size manufacturers who need custom AI solutions but lack dedicated technical teams. Integrates with existing manufacturing workflows to provide intelligent automation and decision support.',
+    tags: ['Python', 'AI/ML', 'Manufacturing', 'Automation'],
     category: 'automation',
+    status: 'development',
+    statusText: 'In Development (80%)',
     features: [
-      'Live production metrics tracking',
-      'Anomaly detection algorithms',
-      'Predictive maintenance scheduling',
-      'Export reports and analytics',
+      'Custom AI for manufacturing workflows',
+      'Integration with existing systems',
+      'Intelligent decision support',
+      'Automated process optimization',
     ],
   },
   {
-    title: 'Automated Quality Control System',
-    description: 'Machine vision for defect detection',
-    longDescription: 'An AI-powered quality control system that uses computer vision to detect defects in film products, reducing manual inspection time and improving accuracy.',
-    image: '/projects/qc-system.png',
-    tags: ['Python', 'OpenCV', 'TensorFlow', 'Raspberry Pi'],
+    title: 'HAVOC',
+    description: 'Custom 7B parameter language model',
+    longDescription: 'A custom 7B parameter language model built from scratch using novel reasoning architectures. Currently in active training with promising convergence metrics.',
+    tags: ['Python', 'Machine Learning', 'LLM', 'PyTorch'],
     category: 'automation',
+    status: 'development',
+    statusText: 'In Development',
     features: [
-      '95% defect detection accuracy',
-      'Real-time image processing',
-      'Automated reject system',
-      'Statistical process control',
+      'Novel reasoning architecture',
+      '7B parameter scale',
+      'Custom training pipeline',
+      'Active convergence optimization',
+    ],
+  },
+  {
+    title: 'NCM Analytics Dashboard',
+    description: 'Real-time manufacturing analytics',
+    longDescription: 'Real-time analytics dashboard for manufacturing operations, providing visibility into non-conforming material metrics and production efficiency. Migrated from legacy SharePoint to modern cloud infrastructure.',
+    tags: ['React', 'Cloudflare Workers', 'D1 Database', 'Analytics'],
+    category: 'software',
+    status: 'production',
+    statusText: 'Deployed',
+    features: [
+      'Real-time NCM tracking',
+      'Production efficiency metrics',
+      'Cloud-native architecture',
+      'Legacy system migration',
     ],
   },
   {
     title: 'Travelogue App',
     description: 'Full-stack travel planning application',
     longDescription: 'A responsive web application for planning and documenting travel experiences, built during my time at LEARN Academy.',
-    image: '/travelogue.png',
     tags: ['React', 'Ruby on Rails', 'PostgreSQL', 'REST API'],
     category: 'software',
+    status: 'production',
+    statusText: 'Completed',
     links: {
       github: 'https://github.com/scott198989/travelogue',
     },
@@ -65,58 +84,12 @@ const projects: Project[] = [
       'RESTful API backend',
     ],
   },
-  {
-    title: 'PLC Control Interface',
-    description: 'Industrial automation HMI design',
-    longDescription: 'A human-machine interface design for PLC-controlled manufacturing equipment, focusing on operator usability and safety.',
-    image: '/projects/plc-hmi.png',
-    tags: ['HMI Design', 'PLC Programming', 'SCADA', 'Industrial'],
-    category: 'engineering',
-    features: [
-      'Intuitive operator interface',
-      'Alarm management system',
-      'Production data logging',
-      'Safety interlock displays',
-    ],
-  },
-  {
-    title: 'Tic Tac Toe with AI',
-    description: 'React game with minimax algorithm',
-    longDescription: 'An interactive Tic Tac Toe game featuring an unbeatable AI opponent implemented using the minimax algorithm.',
-    image: '/tictactoe.png',
-    tags: ['React', 'JavaScript', 'Algorithms', 'Game Dev'],
-    category: 'software',
-    links: {
-      github: 'https://github.com/scott198989/tictactoe',
-    },
-    features: [
-      'Minimax AI algorithm',
-      'Difficulty levels',
-      'Score tracking',
-      'Animated UI',
-    ],
-  },
-  {
-    title: 'Robotic Arm Controller',
-    description: 'Arduino-based pick and place system',
-    longDescription: 'A multi-axis robotic arm controlled via Arduino, designed for pick-and-place operations with precision positioning.',
-    image: '/projects/robotic-arm.png',
-    tags: ['Arduino', 'C++', 'Servo Motors', 'Kinematics'],
-    category: 'engineering',
-    features: [
-      '4-axis movement control',
-      'Position feedback system',
-      'Programmable sequences',
-      'Serial communication interface',
-    ],
-  },
 ];
 
 const categories = [
   { id: 'all', label: 'All Projects', icon: Globe },
-  { id: 'automation', label: 'Automation', icon: Cpu },
+  { id: 'automation', label: 'AI & Automation', icon: Cpu },
   { id: 'software', label: 'Software', icon: Database },
-  { id: 'engineering', label: 'Engineering', icon: Wrench },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -139,9 +112,21 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,212,255,0.1),transparent_70%)]" />
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-6xl opacity-30">
-            {project.category === 'automation' && '⚙️'}
+            {project.category === 'automation' && '🤖'}
             {project.category === 'software' && '💻'}
             {project.category === 'engineering' && '🔧'}
+          </span>
+        </div>
+
+        {/* Status badge */}
+        <div className="absolute top-4 right-4">
+          <span className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full ${
+            project.status === 'production'
+              ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+              : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+          }`}>
+            {project.status === 'production' ? <CheckCircle size={12} /> : <Clock size={12} />}
+            {project.statusText}
           </span>
         </div>
 
@@ -247,7 +232,7 @@ export default function Projects() {
             </span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            A collection of projects spanning automation, software development, and engineering solutions.
+            Real projects spanning AI/ML systems, manufacturing automation, and full-stack development.
           </p>
         </motion.div>
 
@@ -275,7 +260,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Projects grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {filteredProjects.map((project, index) => (
             <ProjectCard key={project.title} project={project} index={index} />
           ))}

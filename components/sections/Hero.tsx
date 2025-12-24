@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ChevronDown, Github, Linkedin, Download } from 'lucide-react';
 
 // Dynamically import the 3D scene to prevent SSR issues
 const HeroCanvas = dynamic(() => import('./HeroCanvas'), {
@@ -49,22 +48,12 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-xl md:text-2xl text-gray-400 mb-4 font-light"
+          className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto font-light"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          Lab Technician | Aspiring Process Engineer | AI Enthusiast
-        </motion.p>
-
-        <motion.p
-          className="text-lg text-gray-500 mb-8 max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-        >
-          Bridging the gap between mechanical systems, electronics, and intelligent automation.
-          Currently pursuing my degree with a <span className="text-cyan-400 font-semibold">3.71 GPA</span>.
+          Manufacturing meets machine learning. I build intelligent systems for the shop floor.
         </motion.p>
 
         <motion.div
@@ -74,17 +63,20 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <a
-            href="#contact"
+            href="#projects"
             className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-105"
           >
-            <span className="relative z-10">Get In Touch</span>
+            <span className="relative z-10">View Projects</span>
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
           <a
-            href="#projects"
-            className="px-8 py-4 border border-gray-700 rounded-lg font-semibold text-gray-300 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 hover:bg-cyan-400/5"
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-8 py-4 border border-gray-700 rounded-lg font-semibold text-gray-300 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 hover:bg-cyan-400/5"
           >
-            View Projects
+            <Download size={20} />
+            Download Resume
           </a>
         </motion.div>
 
@@ -111,13 +103,6 @@ export default function Hero() {
             aria-label="GitHub"
           >
             <Github size={24} />
-          </a>
-          <a
-            href="mailto:scott-tuschl@comcast.net"
-            className="p-3 rounded-full border border-gray-700 text-gray-400 hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300"
-            aria-label="Email"
-          >
-            <Mail size={24} />
           </a>
         </motion.div>
       </div>
