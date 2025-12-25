@@ -4,6 +4,13 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { ExternalLink, Github, Cpu, Database, Globe, Clock, CheckCircle } from 'lucide-react';
+import ProjectCarousel from '@/components/ui/ProjectCarousel';
+
+interface ProjectImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
 
 interface Project {
   title: string;
@@ -18,6 +25,7 @@ interface Project {
     github?: string;
   };
   features: string[];
+  images?: ProjectImage[];
 }
 
 const projects: Project[] = [
@@ -158,6 +166,12 @@ const projects: Project[] = [
       'Premium React dashboard',
       'Enterprise-grade architecture',
     ],
+    images: [
+      { src: '/projects/cpm/dashboard.png', alt: 'CPM Dashboard Overview', caption: 'Real-time equipment monitoring dashboard' },
+      { src: '/projects/cpm/analytics.png', alt: 'Predictive Analytics', caption: 'AI-powered failure prediction' },
+      { src: '/projects/cpm/signals.png', alt: 'Signal Processing', caption: 'C++ signal processing visualization' },
+      { src: '/projects/cpm/alerts.png', alt: 'Alert System', caption: 'Intelligent alert management' },
+    ],
   },
   {
     title: 'AI Virtual Metrology',
@@ -202,22 +216,47 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       whileHover={{ y: -4, transition: { duration: 0.3 } }}
     >
       {/* Top light edge */}
-      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/20 to-transparent z-10" />
 
-      {/* Image placeholder with gradient */}
-      <div className="relative h-48 bg-gradient-to-br from-cyan-500/10 via-blue-600/10 to-purple-500/10 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,212,255,0.08),transparent_70%)]" />
-        <div className="absolute inset-0 backdrop-blur-[1px]" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-6xl opacity-20 drop-shadow-lg">
-            {project.category === 'automation' && '🤖'}
-            {project.category === 'software' && '💻'}
-            {project.category === 'engineering' && '🔧'}
-          </span>
-        </div>
+      {/* Image area - Carousel or Placeholder */}
+      <div className="relative h-48 overflow-hidden">
+        {project.images && project.images.length > 0 ? (
+          /* Carousel for projects with images */
+          <ProjectCarousel images={project.images} projectTitle={project.title} />
+        ) : (
+          /* Default gradient placeholder */
+          <div className="relative w-full h-full bg-gradient-to-br from-cyan-500/10 via-blue-600/10 to-purple-500/10">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,212,255,0.08),transparent_70%)]" />
+            <div className="absolute inset-0 backdrop-blur-[1px]" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-6xl opacity-20 drop-shadow-lg">
+                {project.category === 'automation' && '🤖'}
+                {project.category === 'software' && '💻'}
+                {project.category === 'engineering' && '🔧'}
+              </span>
+            </div>
 
-        {/* Status badge */}
-        <div className="absolute top-4 right-4">
+            {/* Overlay on hover (only for non-carousel) */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent flex flex-col justify-end p-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isHovered ? 1 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ul className="space-y-1">
+                {project.features.slice(0, 3).map((feature, i) => (
+                  <li key={i} className="text-sm text-gray-300 flex items-center gap-2">
+                    <span className="w-1 h-1 bg-cyan-400 rounded-full" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        )}
+
+        {/* Status badge - always visible */}
+        <div className="absolute top-4 right-4 z-20">
           <span className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full backdrop-blur-md ${
             project.status === 'production'
               ? 'bg-green-500/10 text-green-400 border border-green-400/20 shadow-[0_0_10px_rgba(74,222,128,0.1)]'
@@ -227,23 +266,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.statusText}
           </span>
         </div>
-
-        {/* Overlay on hover */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent flex flex-col justify-end p-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <ul className="space-y-1">
-            {project.features.slice(0, 3).map((feature, i) => (
-              <li key={i} className="text-sm text-gray-300 flex items-center gap-2">
-                <span className="w-1 h-1 bg-cyan-400 rounded-full" />
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </motion.div>
       </div>
 
       {/* Content */}
