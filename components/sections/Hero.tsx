@@ -30,7 +30,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span className="inline-block px-4 py-2 mb-6 text-sm font-medium text-cyan-400 border border-cyan-400/30 rounded-full bg-cyan-400/5 backdrop-blur-sm">
+          <span className="inline-block px-5 py-2.5 mb-6 text-sm font-medium text-cyan-400 border border-cyan-400/20 rounded-full bg-cyan-400/5 backdrop-blur-md shadow-[0_0_20px_rgba(0,212,255,0.08),inset_0_1px_0_rgba(255,255,255,0.05)]">
             Mechatronics Engineering Technology
           </span>
         </motion.div>
@@ -64,14 +64,14 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-105"
+            className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl font-semibold text-white overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_-4px_rgba(0,212,255,0.4)] hover:scale-105 shadow-[0_4px_20px_-4px_rgba(0,212,255,0.3),inset_0_1px_0_rgba(255,255,255,0.2)]"
           >
             <span className="relative z-10">View Projects</span>
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
           <a
             href="/resume"
-            className="flex items-center gap-2 px-8 py-4 border border-gray-700 rounded-lg font-semibold text-gray-300 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 hover:bg-cyan-400/5"
+            className="flex items-center gap-2 px-8 py-4 border border-white/10 rounded-xl font-semibold text-gray-300 hover:border-cyan-400/40 hover:text-cyan-400 transition-all duration-300 bg-white/[0.03] backdrop-blur-sm hover:bg-cyan-400/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]"
           >
             <Download size={20} />
             View Resume
@@ -79,7 +79,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          className="flex items-center justify-center gap-6"
+          className="flex items-center justify-center gap-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
@@ -88,19 +88,19 @@ export default function Hero() {
             href="https://linkedin.com/in/scott-tuschl"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full border border-gray-700 text-gray-400 hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300"
+            className="p-3.5 rounded-xl border border-white/10 text-gray-400 hover:border-cyan-400/40 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300 bg-white/[0.02] backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_0_15px_rgba(0,212,255,0.15)]"
             aria-label="LinkedIn"
           >
-            <Linkedin size={24} />
+            <Linkedin size={22} />
           </a>
           <a
             href="https://github.com/scott198989"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full border border-gray-700 text-gray-400 hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300"
+            className="p-3.5 rounded-xl border border-white/10 text-gray-400 hover:border-cyan-400/40 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300 bg-white/[0.02] backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_0_15px_rgba(0,212,255,0.15)]"
             aria-label="GitHub"
           >
-            <Github size={24} />
+            <Github size={22} />
           </a>
         </motion.div>
       </div>

@@ -193,18 +193,23 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
       ref={ref}
-      className="group relative bg-gray-900/50 border border-gray-800 rounded-2xl overflow-hidden hover:border-cyan-400/30 transition-all duration-500"
+      className="group relative crystal-card crystal-shine bg-gradient-to-br from-white/[0.07] to-white/[0.02] border border-white/10 rounded-2xl overflow-hidden hover:border-cyan-400/40 transition-all duration-500 hover:shadow-[0_8px_40px_-12px_rgba(0,212,255,0.15)]"
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      whileHover={{ y: -4, transition: { duration: 0.3 } }}
     >
+      {/* Top light edge */}
+      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
       {/* Image placeholder with gradient */}
-      <div className="relative h-48 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,212,255,0.1),transparent_70%)]" />
+      <div className="relative h-48 bg-gradient-to-br from-cyan-500/10 via-blue-600/10 to-purple-500/10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,212,255,0.08),transparent_70%)]" />
+        <div className="absolute inset-0 backdrop-blur-[1px]" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-6xl opacity-30">
+          <span className="text-6xl opacity-20 drop-shadow-lg">
             {project.category === 'automation' && '🤖'}
             {project.category === 'software' && '💻'}
             {project.category === 'engineering' && '🔧'}
@@ -213,10 +218,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         {/* Status badge */}
         <div className="absolute top-4 right-4">
-          <span className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full ${
+          <span className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full backdrop-blur-md ${
             project.status === 'production'
-              ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-              : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+              ? 'bg-green-500/10 text-green-400 border border-green-400/20 shadow-[0_0_10px_rgba(74,222,128,0.1)]'
+              : 'bg-yellow-500/10 text-yellow-400 border border-yellow-400/20 shadow-[0_0_10px_rgba(250,204,21,0.1)]'
           }`}>
             {project.status === 'production' ? <CheckCircle size={12} /> : <Clock size={12} />}
             {project.statusText}
@@ -242,9 +247,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-6 relative">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
+          <h3 className="text-xl font-bold text-white/95 group-hover:text-cyan-400 transition-colors duration-300">
             {project.title}
           </h3>
           <div className="flex gap-2">
@@ -253,7 +258,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-gray-800 text-gray-400 hover:text-cyan-400 hover:bg-gray-700 transition-all"
+                className="p-2 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400/30 transition-all duration-300"
                 aria-label="View GitHub"
               >
                 <Github size={18} />
@@ -264,7 +269,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-gray-800 text-gray-400 hover:text-cyan-400 hover:bg-gray-700 transition-all"
+                className="p-2 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400/30 transition-all duration-300"
                 aria-label="View Live"
               >
                 <ExternalLink size={18} />
@@ -273,13 +278,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
         </div>
 
-        <p className="text-gray-400 text-sm mb-4 line-clamp-2">{project.longDescription}</p>
+        <p className="text-gray-400/90 text-sm mb-4 line-clamp-2 leading-relaxed">{project.longDescription}</p>
 
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-xs font-medium bg-gray-800 border border-gray-700 rounded-full text-gray-300"
+              className="px-3 py-1 text-xs font-medium bg-white/5 border border-white/10 rounded-full text-gray-300/90 hover:border-white/20 transition-colors"
             >
               {tag}
             </span>
@@ -315,16 +320,16 @@ export default function Projects() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block px-4 py-2 text-sm font-medium text-cyan-400 border border-cyan-400/30 rounded-full bg-cyan-400/5 mb-4">
+          <span className="inline-block px-4 py-2 text-sm font-medium text-cyan-400 border border-cyan-400/20 rounded-full bg-cyan-400/5 backdrop-blur-sm mb-4 shadow-[0_0_15px_rgba(0,212,255,0.08)]">
             Portfolio
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white/95 mb-6">
             Featured{' '}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-400/90 max-w-2xl mx-auto leading-relaxed">
             Real projects spanning AI/ML systems, manufacturing automation, and full-stack development.
           </p>
         </motion.div>
@@ -340,10 +345,10 @@ export default function Projects() {
             <button
               key={id}
               onClick={() => setActiveCategory(id)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm transition-all duration-300 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 backdrop-blur-sm ${
                 activeCategory === id
-                  ? 'bg-cyan-400/10 text-cyan-400 border border-cyan-400/30'
-                  : 'bg-gray-800/50 text-gray-400 border border-gray-700 hover:border-gray-600 hover:text-gray-300'
+                  ? 'bg-cyan-400/15 text-cyan-400 border border-cyan-400/30 shadow-[0_0_20px_rgba(0,212,255,0.1),inset_0_1px_0_rgba(255,255,255,0.1)]'
+                  : 'bg-white/5 text-gray-400 border border-white/10 hover:border-white/20 hover:text-gray-300 hover:bg-white/[0.07]'
               }`}
             >
               <Icon size={16} />
@@ -370,7 +375,7 @@ export default function Projects() {
             href="https://github.com/scott198989"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 text-cyan-400 border border-cyan-400/30 rounded-lg hover:bg-cyan-400/10 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 text-cyan-400 border border-cyan-400/20 rounded-xl hover:bg-cyan-400/10 hover:border-cyan-400/40 transition-all duration-300 bg-white/[0.02] backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:shadow-[0_0_20px_rgba(0,212,255,0.1),inset_0_1px_0_rgba(255,255,255,0.1)]"
           >
             <Github size={20} />
             View More on GitHub

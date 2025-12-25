@@ -43,9 +43,9 @@ export default function Navigation() {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-background/80 backdrop-blur-lg border-b border-gray-800'
+            ? 'bg-background/60 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.2)]'
             : 'bg-transparent'
         }`}
         initial={{ y: -100 }}
@@ -92,9 +92,8 @@ export default function Navigation() {
             {/* Resume Button */}
             <div className="hidden md:block">
               <a
-                href="/resume.pdf"
-                target="_blank"
-                className="px-5 py-2 text-sm font-medium text-cyan-400 border border-cyan-400/50 rounded-lg hover:bg-cyan-400/10 transition-all duration-300"
+                href="/resume"
+                className="px-5 py-2.5 text-sm font-medium text-cyan-400 border border-cyan-400/20 rounded-xl hover:bg-cyan-400/10 hover:border-cyan-400/40 transition-all duration-300 bg-white/[0.02] backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:shadow-[0_0_15px_rgba(0,212,255,0.1)]"
               >
                 Resume
               </a>
@@ -122,25 +121,25 @@ export default function Navigation() {
             exit={{ opacity: 0 }}
           >
             <div
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/50 backdrop-blur-md"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
-              className="absolute right-0 top-0 bottom-0 w-64 bg-gray-900 border-l border-gray-800 p-6 pt-24"
+              className="absolute right-0 top-0 bottom-0 w-72 bg-gradient-to-b from-gray-900/95 to-gray-900/98 backdrop-blur-xl border-l border-white/[0.06] p-6 pt-24 shadow-[-10px_0_40px_rgba(0,0,0,0.3)]"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 {navItems.map((item, index) => (
                   <motion.a
                     key={item.name}
                     href={item.href}
-                    className={`text-lg font-medium transition-colors ${
+                    className={`text-lg font-medium transition-all duration-300 px-4 py-2 rounded-xl ${
                       activeSection === item.href.substring(1)
-                        ? 'text-cyan-400'
-                        : 'text-gray-400 hover:text-white'
+                        ? 'text-cyan-400 bg-cyan-400/10'
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                     initial={{ opacity: 0, x: 20 }}
@@ -151,9 +150,8 @@ export default function Navigation() {
                   </motion.a>
                 ))}
                 <motion.a
-                  href="/resume.pdf"
-                  target="_blank"
-                  className="mt-4 px-5 py-3 text-center text-sm font-medium text-cyan-400 border border-cyan-400/50 rounded-lg hover:bg-cyan-400/10 transition-all"
+                  href="/resume"
+                  className="mt-4 px-5 py-3 text-center text-sm font-medium text-cyan-400 border border-cyan-400/20 rounded-xl hover:bg-cyan-400/10 hover:border-cyan-400/40 transition-all bg-white/[0.02] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navItems.length * 0.1 }}

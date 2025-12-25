@@ -102,16 +102,20 @@ function StatCard({ stat, index, isInView }: { stat: StatItem; index: number; is
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
+      whileHover={{ y: -4, transition: { duration: 0.3 } }}
     >
-      <div className="text-center p-6 bg-gray-900/30 border border-gray-800 rounded-2xl hover:border-cyan-400/30 transition-all duration-300">
+      <div className="text-center p-6 bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/[0.08] rounded-2xl hover:border-cyan-400/30 transition-all duration-300 backdrop-blur-sm relative overflow-hidden">
+        {/* Top light edge */}
+        <div className="absolute top-0 left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+
         {/* Glow effect on hover */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-blue-500/0 group-hover:from-cyan-400/5 group-hover:to-blue-500/5 rounded-2xl transition-all duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-blue-500/0 group-hover:from-cyan-400/5 group-hover:to-blue-500/5 rounded-2xl transition-all duration-500" />
 
         <div className="relative z-10">
-          <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-cyan-400/10 rounded-xl group-hover:bg-cyan-400/20 transition-colors">
+          <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-cyan-400/10 rounded-xl group-hover:bg-cyan-400/15 transition-all duration-300 border border-cyan-400/10 group-hover:border-cyan-400/20 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.15)]">
             <Icon className="w-6 h-6 text-cyan-400" />
           </div>
-          <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+          <div className="text-3xl md:text-4xl font-bold text-white/95 mb-2">
             <AnimatedCounter
               value={stat.value}
               suffix={stat.suffix}
@@ -119,7 +123,7 @@ function StatCard({ stat, index, isInView }: { stat: StatItem; index: number; is
               isInView={isInView}
             />
           </div>
-          <p className="text-sm text-gray-400">{stat.label}</p>
+          <p className="text-sm text-gray-400/90">{stat.label}</p>
         </div>
       </div>
     </motion.div>
@@ -131,12 +135,17 @@ export default function Stats() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="relative py-16 overflow-hidden" ref={ref}>
-      {/* Background gradient line */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
+    <section className="relative py-20 overflow-hidden" ref={ref}>
+      {/* Refined gradient lines */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Subtle background glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] bg-cyan-500/[0.03] rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, index) => (
             <StatCard key={stat.label} stat={stat} index={index} isInView={isInView} />
