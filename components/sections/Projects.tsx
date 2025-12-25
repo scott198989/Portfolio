@@ -132,7 +132,7 @@ const projects: Project[] = [
     status: 'production',
     statusText: 'Production',
     links: {
-      live: 'https://iso-flex-dashboard.vercel.app/login',
+      live: 'https://iso-flex-dashboard-git-main-scott198989s-projects.vercel.app/',
     },
     features: [
       'Live manufacturing data sync',
