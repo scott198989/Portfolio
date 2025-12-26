@@ -167,10 +167,12 @@ const projects: Project[] = [
       'Enterprise-grade architecture',
     ],
     images: [
-      { src: '/projects/cpm/dashboard.png', alt: 'CPM Dashboard Overview', caption: 'Real-time equipment monitoring dashboard' },
-      { src: '/projects/cpm/analytics.png', alt: 'Predictive Analytics', caption: 'AI-powered failure prediction' },
-      { src: '/projects/cpm/signals.png', alt: 'Signal Processing', caption: 'C++ signal processing visualization' },
-      { src: '/projects/cpm/alerts.png', alt: 'Alert System', caption: 'Intelligent alert management' },
+      { src: '/projects/cpm/screenshot1.png', alt: 'CPM Dashboard', caption: 'Real-time equipment monitoring' },
+      { src: '/projects/cpm/screenshot2.png', alt: 'Signal Analysis', caption: 'C++ signal processing engine' },
+      { src: '/projects/cpm/screenshot3.png', alt: 'Causal Analysis', caption: 'Causal inference visualization' },
+      { src: '/projects/cpm/screenshot4.png', alt: 'Predictive Analytics', caption: 'AI-powered failure prediction' },
+      { src: '/projects/cpm/screenshot5.png', alt: '3D Visualization', caption: 'Equipment health visualization' },
+      { src: '/projects/cpm/screenshot6.png', alt: 'Alert System', caption: 'Intelligent alert management' },
     ],
   },
   {

@@ -8,7 +8,11 @@
       "Bash(npm run build:*)",
       "Bash(npx next build:*)",
       "Bash(npm install)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(rm:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)"
     ]
   }
 }
