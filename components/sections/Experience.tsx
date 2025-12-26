@@ -79,7 +79,7 @@ const education: ExperienceItem[] = [
       'Intensive coding bootcamp',
       'Built responsive web applications with React and Ruby on Rails',
     ],
-    skills: ['React', 'Ruby on Rails', 'JavaScript', 'PostgreSQL'],
+    skills: ['JavaScript', 'TypeScript', 'HTML', 'CSS', 'React', 'Python', 'C++', 'SQL', 'Ruby on Rails'],
   },
   {
     title: 'LAN/WAN Network Installation',
