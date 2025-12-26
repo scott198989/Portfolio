@@ -46,6 +46,14 @@ const projects: Project[] = [
       'Token tracking & cost estimation',
       'Practical orchestration patterns',
     ],
+    images: [
+      { src: '/projects/multi-agent/Dashboard.png.png', alt: 'Multi-Agent Dashboard', caption: 'Agent orchestration interface' },
+      { src: '/projects/multi-agent/ConductAna.png.png', alt: 'Conductor Analysis', caption: 'Problem analysis by conductor agent' },
+      { src: '/projects/multi-agent/CondComp.png.png', alt: 'Component View', caption: 'Agent component architecture' },
+      { src: '/projects/multi-agent/Synthesis.png.png', alt: 'Response Synthesis', caption: 'Synthesized multi-agent response' },
+      { src: '/projects/multi-agent/Synthe.png.png', alt: 'Synthesis Details', caption: 'Response synthesis breakdown' },
+      { src: '/projects/multi-agent/DI.png.png', alt: 'Domain Integration', caption: 'Domain-specific agent integration' },
+    ],
   },
   {
     title: 'PlainSpeak Query Interface',
@@ -63,6 +71,15 @@ const projects: Project[] = [
       'Transparent SQL generation',
       'Manufacturing KPI database',
       'Data democratization',
+    ],
+    images: [
+      { src: '/projects/plainspeak/Dashboard.png.png', alt: 'PlainSpeak Dashboard', caption: 'Manufacturing data overview' },
+      { src: '/projects/plainspeak/Query.png.png', alt: 'Query Interface', caption: 'Natural language query input' },
+      { src: '/projects/plainspeak/OEE.png.png', alt: 'OEE Metrics', caption: 'Overall Equipment Effectiveness' },
+      { src: '/projects/plainspeak/Scrap.png.png', alt: 'Scrap Analysis', caption: 'Scrap rate tracking' },
+      { src: '/projects/plainspeak/Downtime.png.png', alt: 'Downtime Analysis', caption: 'Equipment downtime metrics' },
+      { src: '/projects/plainspeak/ProdMetrics.png.png', alt: 'Production Metrics', caption: 'Production performance data' },
+      { src: '/projects/plainspeak/Howitworks.png.png', alt: 'How It Works', caption: 'System architecture overview' },
     ],
   },
   {
@@ -82,6 +99,14 @@ const projects: Project[] = [
       'Failure prediction',
       'Industrial HMI design',
     ],
+    images: [
+      { src: '/projects/sensorsim/Dashboard.png.png', alt: 'Sensor Dashboard', caption: 'Real-time sensor monitoring' },
+      { src: '/projects/sensorsim/AnomDetec.png.png', alt: 'Anomaly Detection', caption: 'Z-score anomaly detection' },
+      { src: '/projects/sensorsim/BearingWear.png.png', alt: 'Bearing Wear', caption: 'Bearing wear prediction' },
+      { src: '/projects/sensorsim/MotorOverload.png.png', alt: 'Motor Overload', caption: 'Motor overload detection' },
+      { src: '/projects/sensorsim/HeaterFail.png.png', alt: 'Heater Failure', caption: 'Heater failure prediction' },
+      { src: '/projects/sensorsim/HowItWorks.png.png', alt: 'How It Works', caption: 'System architecture' },
+    ],
   },
   {
     title: 'ParameterPath Optimizer',
@@ -99,6 +124,14 @@ const projects: Project[] = [
       'Defect diagnosis',
       'Explainable rules-based AI',
       'Manufacturing safety focus',
+    ],
+    images: [
+      { src: '/projects/parameterpath/Dashboard.png.png', alt: 'Parameter Dashboard', caption: 'Expert system dashboard' },
+      { src: '/projects/parameterpath/ProInputs.png.png', alt: 'Process Inputs', caption: 'Material and target input' },
+      { src: '/projects/parameterpath/OpParms.png.png', alt: 'Operating Parameters', caption: 'Recommended parameters' },
+      { src: '/projects/parameterpath/DiagDef.png.png', alt: 'Defect Diagnosis', caption: 'Defect diagnosis interface' },
+      { src: '/projects/parameterpath/ProbCause.png.png', alt: 'Probable Causes', caption: 'Ranked probable causes' },
+      { src: '/projects/parameterpath/Howitworks.png.png', alt: 'How It Works', caption: 'Rules engine architecture' },
     ],
   },
   {
@@ -148,6 +181,14 @@ const projects: Project[] = [
       'Defect distribution analysis',
       'Daily use by QA teams',
     ],
+    images: [
+      { src: '/projects/ncm/dashboard.png.png', alt: 'NCM Dashboard', caption: 'Quality management overview' },
+      { src: '/projects/ncm/login.png.png', alt: 'Login Screen', caption: 'Secure authentication' },
+      { src: '/projects/ncm/Cal.png.png', alt: 'Calendar View', caption: 'NCM calendar tracking' },
+      { src: '/projects/ncm/silo.png.png', alt: 'Data Silos', caption: 'Data organization view' },
+      { src: '/projects/ncm/shqron.png.png', alt: 'Chevron View', caption: 'Process flow visualization' },
+      { src: '/projects/ncm/screens.ang.png', alt: 'Analytics', caption: 'Non-conformance analytics' },
+    ],
   },
   {
     title: 'CPM - Predictive Maintenance',
@@ -191,6 +232,14 @@ const projects: Project[] = [
       'Thermal spray coating analysis',
       'Non-destructive testing',
       'Porosity & thickness prediction',
+    ],
+    images: [
+      { src: '/projects/virtual-metrology/Dashboard.png.png', alt: 'Virtual Metrology Dashboard', caption: 'Quality prediction interface' },
+      { src: '/projects/virtual-metrology/VM.png.png', alt: 'Virtual Metrology', caption: 'AI prediction engine' },
+      { src: '/projects/virtual-metrology/3d.png.png', alt: '3D Visualization', caption: 'Coating thickness visualization' },
+      { src: '/projects/virtual-metrology/Drift.png.png', alt: 'Drift Analysis', caption: 'Process drift monitoring' },
+      { src: '/projects/virtual-metrology/ProductRuns.png.png', alt: 'Product Runs', caption: 'Production run tracking' },
+      { src: '/projects/virtual-metrology/Reports.png.png', alt: 'Reports', caption: 'Quality reports generation' },
     ],
   },
 ];
