@@ -242,6 +242,32 @@ const projects: Project[] = [
       { src: '/projects/virtual-metrology/Reports.png.png', alt: 'Reports', caption: 'Quality reports generation' },
     ],
   },
+  {
+    title: 'Production Assistant',
+    description: 'Operator tool for blown film extrusion',
+    longDescription: 'A practical assistant for production operators at blown film extrusion plants. Provides guidance for line adjustments, change-over procedures, troubleshooting, and other daily operational tasks. Built to reduce downtime and support consistent quality.',
+    tags: ['React', 'Manufacturing', 'Blown Film', 'Operator Tools'],
+    category: 'automation',
+    status: 'production',
+    statusText: 'Live Demo',
+    links: {
+      live: 'https://production-assistant-gamma.vercel.app/',
+    },
+    features: [
+      'Line adjustment guidance',
+      'Change-over procedures',
+      'Troubleshooting support',
+      'Operator reference tools',
+    ],
+    images: [
+      { src: '/projects/production-assistant/Screenshot 2025-12-29 112337.png', alt: 'Production Assistant Dashboard', caption: 'Main dashboard view' },
+      { src: '/projects/production-assistant/Screenshot 2025-12-29 112426.png', alt: 'Production Metrics', caption: 'Production metrics overview' },
+      { src: '/projects/production-assistant/Screenshot 2025-12-29 112443.png', alt: 'Workflow View', caption: 'Workflow management' },
+      { src: '/projects/production-assistant/Screenshot 2025-12-29 112509.png', alt: 'Analytics', caption: 'Production analytics' },
+      { src: '/projects/production-assistant/Screenshot 2025-12-29 112527.png', alt: 'Insights', caption: 'AI-powered insights' },
+      { src: '/projects/production-assistant/Screenshot 2025-12-29 112547.png', alt: 'Reports', caption: 'Production reports' },
+    ],
+  },
 ];
 
 const categories = [
