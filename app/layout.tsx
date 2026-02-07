@@ -1,21 +1,34 @@
 import type { Metadata } from 'next';
+import { Manrope, Space_Grotesk } from 'next/font/google';
 import './globals.css';
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-body',
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://scott-tuschl.com'),
-  title: 'Scott Tuschl | Mechatronics Engineering Technology',
-  description: 'Portfolio of Scott Tuschl - Mechatronics Engineering Technology Student, Lab Technician, and Aspiring Process Engineer. Passionate about automation, AI integration, and manufacturing excellence.',
+  title: 'Scott Tuschl | Mechatronics + AI Portfolio',
+  description:
+    'Portfolio of Scott Tuschl. Mechatronics engineering, manufacturing automation, and AI-powered production systems.',
   keywords: [
+    'Scott Tuschl',
     'mechatronics',
-    'engineering',
-    'process engineer',
-    'automation',
-    'robotics',
-    'AI',
-    'manufacturing',
+    'manufacturing automation',
+    'AI systems',
+    'process engineering',
+    'industrial software',
     'portfolio',
-    'lab technician',
-    'blown film extrusion',
   ],
   authors: [{ name: 'Scott Tuschl' }],
   creator: 'Scott Tuschl',
@@ -24,21 +37,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://scott-tuschl.com',
     siteName: 'Scott Tuschl Portfolio',
-    title: 'Scott Tuschl | Mechatronics Engineering Technology',
-    description: 'Mechatronics Engineering Technology Student & Aspiring Process Engineer. Building the future of manufacturing with automation and AI.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Scott Tuschl - Mechatronics Engineering',
-      },
-    ],
+    title: 'Scott Tuschl | Mechatronics + AI Portfolio',
+    description:
+      'Manufacturing-focused software, automation architecture, and AI product delivery by Scott Tuschl.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Scott Tuschl | Mechatronics Engineering',
-    description: 'Mechatronics Engineering Student & Aspiring Process Engineer',
+    title: 'Scott Tuschl | Mechatronics + AI Portfolio',
+    description: 'Manufacturing automation and AI portfolio by Scott Tuschl.',
   },
   robots: {
     index: true,
@@ -52,19 +58,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <meta name="theme-color" content="#0a0a0f" />
-      </head>
-      <body className="antialiased min-h-screen">
-        {children}
-      </body>
+    <html lang="en">
+      <body className={`${manrope.variable} ${spaceGrotesk.variable} antialiased`}>{children}</body>
     </html>
   );
 }

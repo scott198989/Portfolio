@@ -1,56 +1,76 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { FileText, Linkedin, ArrowLeft, Mail } from 'lucide-react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Download, Linkedin, Mail, ShieldCheck } from 'lucide-react';
 
 export default function ResumePage() {
   return (
-    <main className="min-h-screen bg-background flex items-center justify-center p-4">
-      <motion.div
-        className="max-w-md w-full text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center bg-cyan-400/10 rounded-2xl">
-          <FileText className="w-10 h-10 text-cyan-400" />
-        </div>
+    <main className="section-block">
+      <div className="layout-container" style={{ maxWidth: '920px' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+          className="surface-card"
+          style={{ padding: 'clamp(18px, 3vw, 30px)' }}
+        >
+          <p className="section-eyebrow">Resume Access</p>
+          <h1 className="section-title">Scott Tuschl Resume</h1>
+          <p className="section-description" style={{ marginTop: '12px' }}>
+            The latest resume is shared directly so I can provide the most current version for your role or project context.
+            Use any option below.
+          </p>
 
-        <h1 className="text-3xl font-bold text-white mb-4">Resume</h1>
-
-        <p className="text-gray-400 mb-8">
-          My full resume is available upon request. Connect with me on LinkedIn or use the contact form to request a copy.
-        </p>
-
-        <div className="space-y-3">
-          <a
-            href="https://linkedin.com/in/scott-tuschl"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
+          <div
+            style={{
+              marginTop: '16px',
+              border: '1px solid rgba(137, 179, 202, 0.24)',
+              borderRadius: '14px',
+              background: 'rgba(11, 26, 36, 0.72)',
+              padding: '14px',
+              color: '#cddde7',
+            }}
           >
-            <Linkedin size={20} />
-            View LinkedIn Profile
-          </a>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: '#bafef2' }}>
+              <ShieldCheck className="h-4 w-4" />
+              <strong>Fast response preferred channels</strong>
+            </div>
+            <p style={{ margin: 0, lineHeight: 1.6, color: '#9fb2bf' }}>
+              Email requests are best for resume delivery and role-specific notes. LinkedIn is best for networking and introductions.
+            </p>
+          </div>
 
-          <Link
-            href="/#contact"
-            className="flex items-center justify-center gap-2 w-full px-6 py-4 border border-gray-700 text-gray-300 font-semibold rounded-lg hover:border-cyan-400/50 hover:text-cyan-400 transition-all"
-          >
-            <Mail size={20} />
-            Request via Contact Form
-          </Link>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '18px' }}>
+            <a href="mailto:scott.tuschl@gmail.com?subject=Resume%20Request" className="button-primary">
+              <Mail className="h-4 w-4" />
+              Request via Email
+            </a>
 
-          <Link
-            href="/"
-            className="flex items-center justify-center gap-2 w-full px-6 py-4 text-gray-500 hover:text-gray-300 transition-colors"
-          >
-            <ArrowLeft size={18} />
-            Back to Portfolio
-          </Link>
-        </div>
-      </motion.div>
+            <a
+              href="https://linkedin.com/in/scott-tuschl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-secondary"
+            >
+              <Linkedin className="h-4 w-4" />
+              Open LinkedIn
+            </a>
+
+            <Link href="/#contact" className="button-secondary">
+              <Download className="h-4 w-4" />
+              Go to Contact Section
+            </Link>
+          </div>
+
+          <div style={{ marginTop: '14px' }}>
+            <Link href="/" className="button-secondary compact">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Portfolio
+            </Link>
+          </div>
+        </motion.div>
+      </div>
     </main>
   );
 }
