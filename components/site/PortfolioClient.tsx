@@ -24,10 +24,10 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { FormEvent, useMemo, useState } from 'react';
+import ClientErrorBoundary from './ClientErrorBoundary';
 
-const HeroCanvas3D = dynamic(() => import('./HeroCanvas3D'), {
-  ssr: false,
-  loading: () => (
+function HeroCanvasFallback() {
+  return (
     <div className="hero-canvas-fallback" aria-hidden="true">
       <div className="fallback-orb fallback-orb-a" />
       <div className="fallback-orb fallback-orb-b" />
@@ -36,8 +36,22 @@ const HeroCanvas3D = dynamic(() => import('./HeroCanvas3D'), {
       <div className="fallback-ring fallback-ring-a" />
       <div className="fallback-ring fallback-ring-b" />
     </div>
-  ),
-});
+  );
+}
+
+const HeroCanvas3D = dynamic(
+  async () => {
+    try {
+      return await import('./HeroCanvas3D');
+    } catch {
+      return { default: HeroCanvasFallback };
+    }
+  },
+  {
+  ssr: false,
+    loading: HeroCanvasFallback,
+  }
+);
 
 type NavItem = {
   label: string;
@@ -348,7 +362,9 @@ export default function PortfolioClient() {
               transition={{ duration: 0.85, delay: 0.2 }}
               className="hero-visual"
             >
-              <HeroCanvas3D />
+              <ClientErrorBoundary fallback={<HeroCanvasFallback />}>
+                <HeroCanvas3D />
+              </ClientErrorBoundary>
               <div className="hero-chip chip-a">
                 <Layers3 className="h-4 w-4" />
                 <span>3D Product Storytelling</span>
