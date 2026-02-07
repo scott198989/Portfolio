@@ -12,74 +12,63 @@ interface ParticleFieldProps {
 }
 
 export default function ParticleField({
-  count = 2000,
-  color = '#00d4ff',
-  size = 0.015,
-  speed = 0.2
+  count = 800,
+  color = '#F97316',
+  size = 0.02,
+  speed = 0.3,
 }: ParticleFieldProps) {
-  const mesh = useRef<THREE.Points>(null);
+  const pointsRef = useRef<THREE.Points>(null);
 
-  const particles = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    const velocities = new Float32Array(count * 3);
-
+  const positions = useMemo(() => {
+    const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
-      positions[i3] = (Math.random() - 0.5) * 20;
-      positions[i3 + 1] = (Math.random() - 0.5) * 20;
-      positions[i3 + 2] = (Math.random() - 0.5) * 20;
-
-      velocities[i3] = (Math.random() - 0.5) * 0.01;
-      velocities[i3 + 1] = (Math.random() - 0.5) * 0.01;
-      velocities[i3 + 2] = (Math.random() - 0.5) * 0.01;
+      pos[i * 3] = (Math.random() - 0.5) * 12;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 12;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 12;
     }
-
-    return { positions, velocities };
+    return pos;
   }, [count]);
 
   useFrame((state) => {
-    if (!mesh.current) return;
-
-    const positions = mesh.current.geometry.attributes.position.array as Float32Array;
-    const time = state.clock.getElapsedTime();
+    if (!pointsRef.current) return;
+    const posArray = pointsRef.current.geometry.attributes.position.array as Float32Array;
+    const time = state.clock.elapsedTime * speed;
 
     for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
+      const idx = i * 3;
+      // Gentle vortex movement
+      posArray[idx] += Math.sin(time + i * 0.1) * 0.002;
+      posArray[idx + 1] += Math.cos(time + i * 0.05) * 0.001;
+      posArray[idx + 2] += Math.sin(time + i * 0.08) * 0.001;
 
-      positions[i3] += Math.sin(time * speed + i) * 0.001;
-      positions[i3 + 1] += Math.cos(time * speed + i) * 0.001;
-      positions[i3 + 2] += Math.sin(time * speed * 0.5 + i) * 0.001;
-
-      // Wrap around boundaries
-      if (positions[i3] > 10) positions[i3] = -10;
-      if (positions[i3] < -10) positions[i3] = 10;
-      if (positions[i3 + 1] > 10) positions[i3 + 1] = -10;
-      if (positions[i3 + 1] < -10) positions[i3 + 1] = 10;
-      if (positions[i3 + 2] > 10) positions[i3 + 2] = -10;
-      if (positions[i3 + 2] < -10) positions[i3 + 2] = 10;
+      // Boundary wrap
+      if (Math.abs(posArray[idx]) > 6) posArray[idx] *= -0.9;
+      if (Math.abs(posArray[idx + 1]) > 6) posArray[idx + 1] *= -0.9;
+      if (Math.abs(posArray[idx + 2]) > 6) posArray[idx + 2] *= -0.9;
     }
 
-    mesh.current.geometry.attributes.position.needsUpdate = true;
-    mesh.current.rotation.y = time * 0.02;
+    pointsRef.current.geometry.attributes.position.needsUpdate = true;
+    pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02;
   });
 
   return (
-    <points ref={mesh}>
+    <points ref={pointsRef}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
           count={count}
-          array={particles.positions}
+          array={positions}
           itemSize={3}
         />
       </bufferGeometry>
       <pointsMaterial
-        size={size}
         color={color}
-        sizeAttenuation
+        size={size}
         transparent
-        opacity={0.8}
+        opacity={0.6}
         blending={THREE.AdditiveBlending}
+        depthWrite={false}
+        sizeAttenuation
       />
     </points>
   );

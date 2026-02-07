@@ -1,5 +1,5 @@
-import PortfolioClient from '@/components/site/PortfolioClient';
+import PortfolioPage from '@/components/site/PortfolioPage';
 
 export default function Home() {
-  return <PortfolioClient />;
+  return <PortfolioPage />;
 }
