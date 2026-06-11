@@ -1,92 +1,66 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  darkMode: ['class'],
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './data/**/*.{js,ts,jsx,tsx}',
+    './app/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './data/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {
       colors: {
-        forge: {
-          deep: '#0C0A09',
-          bg: '#1C1917',
-          elevated: '#292524',
-          surface: '#44403C',
+        void: 'var(--void)',
+        panel: 'var(--panel)',
+        raised: 'var(--raised)',
+        line: {
+          DEFAULT: 'var(--line)',
+          bright: 'var(--line-bright)',
         },
-        accent: {
-          DEFAULT: '#F97316',
-          hover: '#EA580C',
-          glow: '#FB923C',
-          subtle: 'rgba(249, 115, 22, 0.12)',
+        ink: {
+          DEFAULT: 'var(--ink)',
+          muted: 'var(--ink-muted)',
+          faint: 'var(--ink-faint)',
         },
-        steel: {
-          DEFAULT: '#94A3B8',
-          bright: '#CBD5E1',
-          accent: '#38BDF8',
+        amber: {
+          DEFAULT: 'var(--amber)',
+          soft: 'var(--amber-soft)',
         },
+        signal: 'var(--signal)',
+        ok: 'var(--ok)',
+        alert: 'var(--alert)',
       },
       fontFamily: {
-        display: ['var(--font-display)', 'JetBrains Mono', 'monospace'],
-        body: ['var(--font-body)', 'Inter', 'sans-serif'],
-      },
-      borderRadius: {
-        lg: '16px',
-        md: '12px',
-        sm: '10px',
-      },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'float-slow': 'float-slow 8s ease-in-out infinite',
-        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-        'fade-in': 'fade-in 0.5s ease-out',
-        'slide-up': 'slide-up 0.5s ease-out',
-        'spin-slow': 'spin 20s linear infinite',
-        'spin-very-slow': 'spin 30s linear infinite',
-        'spin-reverse': 'spin-reverse 15s linear infinite',
-        'forge-glow': 'forge-glow 4s ease-in-out infinite',
-        'spark': 'spark 0.6s ease-out forwards',
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+        'led-pulse': {
+          '0%, 100%': { opacity: '1', boxShadow: '0 0 6px 1px currentColor' },
+          '50%': { opacity: '0.45', boxShadow: '0 0 2px 0 currentColor' },
         },
-        'float-slow': {
-          '0%, 100%': { transform: 'translateY(0px) scale(1)' },
-          '50%': { transform: 'translateY(-30px) scale(1.05)' },
+        blink: {
+          '0%, 49%': { opacity: '1' },
+          '50%, 100%': { opacity: '0' },
         },
-        'pulse-glow': {
-          '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
-          '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
-        'spin-reverse': {
-          '0%': { transform: 'rotate(360deg)' },
-          '100%': { transform: 'rotate(0deg)' },
+        'scroll-cue': {
+          '0%': { transform: 'translateY(-100%)' },
+          '60%, 100%': { transform: 'translateY(100%)' },
         },
-        'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        'slide-up': {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        'forge-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(249, 115, 22, 0.15)' },
-          '50%': { boxShadow: '0 0 40px rgba(249, 115, 22, 0.3)' },
-        },
-        'spark': {
-          '0%': { transform: 'scale(0) rotate(0deg)', opacity: '1' },
-          '100%': { transform: 'scale(1) rotate(180deg)', opacity: '0' },
-        },
+      },
+      animation: {
+        'led-pulse': 'led-pulse 2.4s ease-in-out infinite',
+        blink: 'blink 1.1s step-end infinite',
+        marquee: 'marquee 36s linear infinite',
+        'scroll-cue': 'scroll-cue 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite',
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [],
 };
 
 export default config;

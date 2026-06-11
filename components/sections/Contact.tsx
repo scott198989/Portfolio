@@ -1,270 +1,126 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { MapPin, Linkedin, Github, Send, CheckCircle, Loader2 } from 'lucide-react';
-import GitHubActivity from './GitHubActivity';
+import { useState } from 'react';
+import Link from 'next/link';
+import { ArrowUpRight, Check, Copy, FileText, Github, Linkedin, Mail } from 'lucide-react';
+import { Section } from '@/components/Section';
+import { Reveal } from '@/components/Reveal';
+import { Corners } from '@/components/ui/Corners';
+import { Led } from '@/components/ui/Led';
+import { profile } from '@/data/profile';
 
-const contactInfo = [
+const CHANNELS = [
   {
-    icon: MapPin,
-    label: 'Location',
-    value: 'White House, TN',
-    href: null,
+    label: 'Email',
+    value: profile.email,
+    href: `mailto:${profile.email}`,
+    icon: Mail,
+    hint: 'Best for role inquiries & resume requests',
   },
   {
-    icon: Linkedin,
     label: 'LinkedIn',
-    value: '/in/scott-tuschl',
-    href: 'https://linkedin.com/in/scott-tuschl',
+    value: 'in/scott-tuschl',
+    href: profile.linkedin,
+    icon: Linkedin,
+    hint: 'Networking & introductions',
+  },
+  {
+    label: 'GitHub',
+    value: profile.githubUser,
+    href: profile.github,
+    icon: Github,
+    hint: 'Code, commits & experiments',
   },
 ];
 
-export default function Contact() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+export function Contact() {
+  const [copied, setCopied] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormState({ name: '', email: '', subject: '', message: '' });
-
-    // Reset success state after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `mailto:${profile.email}`;
+    }
   };
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden" ref={ref}>
-      {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-      </div>
+    <Section
+      id="contact"
+      index="06"
+      code="Open Channel"
+      title="Contact"
+      lead="Open to mechatronics, controls, and industrial-AI opportunities. The channel is live — pick a frequency."
+    >
+      <Reveal>
+        <div className="panel relative p-6 sm:p-10">
+          <Corners />
+          <div className="mb-8 flex items-center gap-3">
+            <Led tone="ok" />
+            <span className="overline-label">RECEIVING ON ALL CHANNELS</span>
+          </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-block px-4 py-2 text-sm font-medium text-cyan-400 border border-cyan-400/30 rounded-full bg-cyan-400/5 mb-4">
-            Get In Touch
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Let&apos;s{' '}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Connect
-            </span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Interested in discussing process engineering, automation projects, or potential opportunities?
-            I&apos;d love to hear from you.
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* 3D Scene & Contact Info */}
-          <motion.div
-            className="space-y-8"
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {/* GitHub Activity */}
-            <GitHubActivity />
-
-            {/* Contact Info Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              {contactInfo.map(({ icon: Icon, label, value, href }) => (
-                <motion.div
-                  key={label}
-                  className="p-4 bg-gray-900/50 border border-gray-800 rounded-xl hover:border-cyan-400/30 transition-all duration-300 group"
-                  whileHover={{ y: -2 }}
-                >
-                  {href ? (
-                    <a
-                      href={href}
-                      target={href.startsWith('http') ? '_blank' : undefined}
-                      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="block"
-                    >
-                      <Icon className="w-5 h-5 text-cyan-400 mb-2" />
-                      <p className="text-xs text-gray-500 mb-1">{label}</p>
-                      <p className="text-sm text-gray-300 group-hover:text-cyan-400 transition-colors truncate">
-                        {value}
-                      </p>
-                    </a>
-                  ) : (
-                    <>
-                      <Icon className="w-5 h-5 text-cyan-400 mb-2" />
-                      <p className="text-xs text-gray-500 mb-1">{label}</p>
-                      <p className="text-sm text-gray-300">{value}</p>
-                    </>
-                  )}
-                </motion.div>
-              ))}
+          <div className="flex flex-col gap-4 border border-line bg-raised p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
+              <p className="overline-label mb-1.5">PRIMARY FREQUENCY</p>
+              <p className="truncate font-mono text-base text-ink sm:text-xl">{profile.email}</p>
             </div>
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="btn-outline shrink-0"
+              aria-live="polite"
+            >
+              {copied ? (
+                <>
+                  <Check className="h-4 w-4 text-ok" aria-hidden />
+                  Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4" aria-hidden />
+                  Copy Address
+                </>
+              )}
+            </button>
+          </div>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-500">Find me on:</span>
-              <div className="flex gap-3">
-                <a
-                  href="https://linkedin.com/in/scott-tuschl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-lg bg-gray-800 text-gray-400 hover:text-cyan-400 hover:bg-gray-700 transition-all"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={20} />
-                </a>
-                <a
-                  href="https://github.com/scott198989"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-lg bg-gray-800 text-gray-400 hover:text-cyan-400 hover:bg-gray-700 transition-all"
-                  aria-label="GitHub"
-                >
-                  <Github size={20} />
-                </a>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            className="p-8 bg-gray-900/50 border border-gray-800 rounded-2xl"
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
-                    placeholder="john@example.com"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formState.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
-                  placeholder="Project Inquiry"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formState.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all resize-none"
-                  placeholder="Tell me about your project or opportunity..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting || isSubmitted}
-                className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-semibold transition-all duration-300 ${
-                  isSubmitted
-                    ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                    : 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/20'
-                } disabled:opacity-70 disabled:cursor-not-allowed`}
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            {CHANNELS.map((ch) => (
+              <a
+                key={ch.label}
+                href={ch.href}
+                target={ch.href.startsWith('http') ? '_blank' : undefined}
+                rel={ch.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="group border border-line p-5 transition-colors hover:border-amber"
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="animate-spin" size={20} />
-                    Sending...
-                  </>
-                ) : isSubmitted ? (
-                  <>
-                    <CheckCircle size={20} />
-                    Message Sent!
-                  </>
-                ) : (
-                  <>
-                    <Send size={20} />
-                    Send Message
-                  </>
-                )}
-              </button>
-            </form>
-          </motion.div>
-        </div>
-      </div>
+                <div className="flex items-center justify-between">
+                  <ch.icon className="h-5 w-5 text-amber" aria-hidden />
+                  <ArrowUpRight
+                    className="h-4 w-4 text-ink-faint transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-amber"
+                    aria-hidden
+                  />
+                </div>
+                <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-ink">{ch.label}</p>
+                <p className="mt-1 truncate font-mono text-sm text-ink-muted">{ch.value}</p>
+                <p className="mt-2 text-xs leading-relaxed text-ink-faint">{ch.hint}</p>
+              </a>
+            ))}
+          </div>
 
-      {/* Footer */}
-      <div className="mt-24 border-t border-gray-800 pt-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-            <p>&copy; {new Date().getFullYear()} Scott Tuschl. All rights reserved.</p>
-            <p>Built with React, Next.js & Tailwind CSS</p>
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+            <p className="font-mono text-xs tracking-wider text-ink-faint">
+              {'// RESUME AVAILABLE ON REQUEST — CURRENT VERSION, TAILORED TO ROLE'}
+            </p>
+            <Link href="/resume" className="btn-primary">
+              <FileText className="h-4 w-4" aria-hidden />
+              View Resume
+            </Link>
           </div>
         </div>
-      </div>
-    </section>
+      </Reveal>
+    </Section>
   );
 }

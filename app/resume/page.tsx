@@ -1,72 +1,167 @@
-'use client';
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Linkedin, Mail, ShieldCheck, MessageSquare } from 'lucide-react';
+import { ArrowLeft, Github, Linkedin, Mail } from 'lucide-react';
+import { PrintButton } from '@/components/PrintButton';
+import { workExperience, education } from '@/data/experience';
+import { stackGroups } from '@/data/capabilities';
+import { profile } from '@/data/profile';
+
+export const metadata: Metadata = {
+  title: 'Resume',
+  description: 'Resume of Scott Tuschl — mechatronics engineering and industrial AI.',
+};
 
 export default function ResumePage() {
   return (
-    <main className="min-h-screen bg-forge-deep flex items-center justify-center px-4 py-16">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55 }}
-        className="w-full max-w-2xl rounded-2xl border border-stone-800 bg-stone-900/60 p-6 md:p-8"
-      >
-        <p className="font-display text-xs uppercase tracking-[0.15em] text-accent font-semibold mb-2">
-          Resume Access
-        </p>
-        <h1 className="text-3xl md:text-4xl font-bold text-stone-100 mb-3">Scott Tuschl Resume</h1>
-        <p className="text-stone-400 text-base leading-relaxed mb-6">
-          The latest resume is shared directly so I can provide the most current version for your
-          role or project context. Use any option below.
-        </p>
-
-        <div className="rounded-xl border border-stone-800 bg-stone-950/50 p-4 mb-6">
-          <div className="flex items-center gap-2 mb-2 text-accent">
-            <ShieldCheck className="w-4 h-4" />
-            <strong className="text-sm font-semibold">Fast response preferred channels</strong>
+    <main className="min-h-screen py-10 print:py-0">
+      <div className="container-x">
+        <div className="no-print mb-8 flex flex-wrap items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink-muted transition-colors hover:text-amber"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden />
+            Back to Portfolio
+          </Link>
+          <div className="flex flex-wrap gap-3">
+            <a href={`mailto:${profile.email}?subject=Resume%20Request`} className="btn-primary">
+              <Mail className="h-4 w-4" aria-hidden />
+              Request Latest Version
+            </a>
+            <PrintButton />
           </div>
-          <p className="text-stone-500 text-sm leading-relaxed">
-            Email requests are best for resume delivery and role-specific notes. LinkedIn is best
-            for networking and introductions.
-          </p>
         </div>
 
-        <div className="flex flex-wrap gap-3 mb-6">
+        {/* The document — styled as a physical artifact, prints clean */}
+        <article className="mx-auto max-w-3xl bg-white p-8 text-neutral-900 shadow-[0_24px_80px_rgba(0,0,0,0.5)] sm:p-12 print:max-w-none print:p-0 print:shadow-none">
+          <header className="border-b-2 border-neutral-900 pb-6">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+              Service Record — Document ST-2026-CV
+            </p>
+            <h1 className="mt-2 font-display text-4xl font-bold uppercase tracking-tight">
+              {profile.name}
+            </h1>
+            <p className="mt-1 text-sm font-medium text-neutral-600">
+              Mechatronics Engineering Technologist · Industrial AI · U.S. Army Veteran
+            </p>
+            <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs text-neutral-600">
+              <span>{profile.email}</span>
+              <span>linkedin.com/in/scott-tuschl</span>
+              <span>github.com/{profile.githubUser}</span>
+              <span>scott-tuschl.com</span>
+            </p>
+          </header>
+
+          <section className="mt-7">
+            <h2 className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-neutral-900">
+              01 / Summary
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-700">{profile.summary}</p>
+          </section>
+
+          <section className="mt-7">
+            <h2 className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-neutral-900">
+              02 / Experience
+            </h2>
+            <div className="mt-4 space-y-6">
+              {workExperience.map((job) => (
+                <div key={`${job.title}-${job.organization}`} className="break-inside-avoid">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                    <h3 className="font-display text-base font-bold">{job.title}</h3>
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-neutral-500">
+                      {job.period}
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium text-neutral-600">{job.organization}</p>
+                  <ul className="mt-2 space-y-1">
+                    {job.description.map((d) => (
+                      <li key={d} className="flex gap-2 text-sm leading-relaxed text-neutral-700">
+                        <span aria-hidden>—</span>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-7">
+            <h2 className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-neutral-900">
+              03 / Education &amp; Training
+            </h2>
+            <div className="mt-4 space-y-5">
+              {education.map((item) => (
+                <div key={`${item.title}-${item.organization}`} className="break-inside-avoid">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                    <h3 className="font-display text-base font-bold">{item.title}</h3>
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-neutral-500">
+                      {item.period}
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium text-neutral-600">{item.organization}</p>
+                  <ul className="mt-2 space-y-1">
+                    {item.description.map((d) => (
+                      <li key={d} className="flex gap-2 text-sm leading-relaxed text-neutral-700">
+                        <span aria-hidden>—</span>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-7">
+            <h2 className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-neutral-900">
+              04 / Technical Skills
+            </h2>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {stackGroups.map((group) => (
+                <div key={group.code} className="break-inside-avoid">
+                  <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500">
+                    {group.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-neutral-700">
+                    {group.items.join(' · ')}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <footer className="mt-10 border-t border-neutral-300 pt-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-400">
+              Generated from scott-tuschl.com — request the latest tailored version by email
+            </p>
+          </footer>
+        </article>
+
+        <div className="no-print mx-auto mt-8 flex max-w-3xl items-center justify-center gap-4 pb-10">
           <a
-            href="mailto:scott.tuschl@gmail.com?subject=Resume%20Request"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm bg-accent text-stone-950 hover:bg-accent-hover transition-colors"
-          >
-            <Mail className="w-4 h-4" />
-            Request via Email
-          </a>
-          <a
-            href="https://linkedin.com/in/scott-tuschl"
+            href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border border-stone-700 text-stone-300 hover:border-accent/40 hover:text-accent transition-colors"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink-muted transition-colors hover:text-amber"
           >
-            <Linkedin className="w-4 h-4" />
-            Open LinkedIn
+            <Linkedin className="h-4 w-4" aria-hidden />
+            LinkedIn
           </a>
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border border-stone-700 text-stone-300 hover:border-accent/40 hover:text-accent transition-colors"
+          <span className="text-ink-faint" aria-hidden>
+            {'//'}
+          </span>
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink-muted transition-colors hover:text-amber"
           >
-            <MessageSquare className="w-4 h-4" />
-            Go to Contact Section
-          </Link>
+            <Github className="h-4 w-4" aria-hidden />
+            GitHub
+          </a>
         </div>
-
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-stone-400 hover:text-accent transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Portfolio
-        </Link>
-      </motion.div>
+      </div>
     </main>
   );
 }

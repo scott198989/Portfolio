@@ -1,145 +1,113 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { GraduationCap, Target, Zap, Cog, Bot, Factory, Brain } from 'lucide-react';
+import { Section } from '@/components/Section';
+import { Reveal } from '@/components/Reveal';
+import { Corners } from '@/components/ui/Corners';
+import { Led } from '@/components/ui/Led';
+import { projects } from '@/data/projects';
 
-const highlights = [
-  {
-    icon: GraduationCap,
-    title: '3.71 GPA',
-    description: 'Mechatronics Engineering Technology',
-  },
-  {
-    icon: Factory,
-    title: 'Lab Technician',
-    description: 'Blown Film Extrusion Plant',
-  },
-  {
-    icon: Target,
-    title: 'Process Engineer',
-    description: 'Career Aspiration',
-  },
-  {
-    icon: Brain,
-    title: 'AI Integration',
-    description: 'Current Focus',
-  },
+const liveCount = projects.filter((p) => p.links?.live).length;
+
+const ID_ROWS = [
+  { label: 'CALLSIGN', value: 'TUSCHL' },
+  { label: 'ROLE', value: 'MECHATRONICS ENG' },
+  { label: 'SERVICE', value: 'US ARMY 2008–2014' },
+  { label: 'EDUCATION', value: 'B.S. MET — APSU' },
+  { label: 'STATUS', value: 'OPERATIONAL', tone: 'ok' as const },
 ];
 
-const interests = [
-  { icon: Cog, label: 'Industrial Automation' },
-  { icon: Bot, label: 'Robotics & AI' },
-  { icon: Zap, label: 'Process Optimization' },
-  { icon: Factory, label: 'Manufacturing Systems' },
-];
-
-export default function About() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
+export function About() {
   return (
-    <section id="about" className="relative py-32 overflow-hidden" ref={ref}>
-      {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-64 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-64 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-        >
-          {/* Section header */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <span className="inline-block px-4 py-2 text-sm font-medium text-cyan-400 border border-cyan-400/30 rounded-full bg-cyan-400/5 mb-4">
-              About Me
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Engineering the{' '}
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Future
-              </span>
-            </h2>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left column - Text content */}
-            <motion.div variants={itemVariants} className="space-y-6">
-              <p className="text-lg text-gray-300 leading-relaxed">
-                As a <span className="text-cyan-400 font-semibold">Mechatronics Engineering Technology</span> student
-                with a strong academic record, I&apos;m passionate about bridging the gap between mechanical systems,
-                electronics, and intelligent automation.
-              </p>
-              <p className="text-lg text-gray-400 leading-relaxed">
-                Currently working as a <span className="text-cyan-400">Lab Technician</span> at a blown film
-                extrusion plant, I gain hands-on experience with industrial manufacturing processes while
-                pursuing my degree. This unique combination of academic knowledge and real-world application
-                drives my ambition to become a <span className="text-cyan-400">Process Engineer</span>.
-              </p>
-              <p className="text-lg text-gray-400 leading-relaxed">
-                My vision is to leverage <span className="text-cyan-400">artificial intelligence</span> and
-                modern automation technologies to optimize manufacturing processes, improve efficiency, and
-                push the boundaries of what&apos;s possible in industrial engineering.
-              </p>
-
-              {/* Interest tags */}
-              <div className="flex flex-wrap gap-3 pt-4">
-                {interests.map(({ icon: Icon, label }) => (
-                  <div
-                    key={label}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-full text-sm text-gray-300 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300"
-                  >
-                    <Icon size={16} />
-                    <span>{label}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Right column - Highlight cards */}
-            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-4">
-              {highlights.map(({ icon: Icon, title, description }, index) => (
-                <motion.div
-                  key={title}
-                  className="group relative p-6 bg-gray-900/50 border border-gray-800 rounded-2xl hover:border-cyan-400/30 transition-all duration-300"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                >
-                  {/* Glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-blue-500/0 group-hover:from-cyan-400/5 group-hover:to-blue-500/5 rounded-2xl transition-all duration-300" />
-
-                  <div className="relative z-10">
-                    <div className="w-12 h-12 flex items-center justify-center bg-cyan-400/10 rounded-xl mb-4 group-hover:bg-cyan-400/20 transition-colors">
-                      <Icon className="w-6 h-6 text-cyan-400" />
-                    </div>
-                    <h3 className="text-xl font-bold text-white mb-1">{title}</h3>
-                    <p className="text-sm text-gray-400">{description}</p>
-                  </div>
-                </motion.div>
+    <Section
+      id="about"
+      index="01"
+      code="Operator Profile"
+      title="About"
+      lead="The shortest version: I ran the machines for nine years before I started writing the software that runs them."
+    >
+      <div className="grid gap-10 lg:grid-cols-[340px_minmax(0,1fr)] lg:gap-14">
+        <Reveal>
+          <div className="panel relative p-5">
+            <Corners />
+            <div className="mb-4 flex items-center justify-between border-b border-line pb-3">
+              <span className="overline-label">OPERATOR ID</span>
+              <Led tone="ok" />
+            </div>
+            <div className="relative overflow-hidden border border-line bg-raised">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/profile.png"
+                alt="Portrait of Scott Tuschl"
+                width={640}
+                height={920}
+                className="aspect-[4/5] w-full object-cover object-top [filter:grayscale(1)_sepia(0.32)_hue-rotate(-12deg)_saturate(1.5)_brightness(0.95)] transition-[filter] duration-500 hover:[filter:none]"
+              />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-panel/70 to-transparent"
+              />
+            </div>
+            <dl className="mt-4 space-y-2 font-mono text-[11px] tracking-wider">
+              {ID_ROWS.map((row) => (
+                <div key={row.label} className="flex items-baseline justify-between gap-3">
+                  <dt className="text-ink-faint">{row.label}</dt>
+                  <dd className={row.tone === 'ok' ? 'text-ok' : 'text-ink-muted'}>{row.value}</dd>
+                </div>
               ))}
-            </motion.div>
+            </dl>
+            <div
+              aria-hidden
+              className="mt-4 h-7 w-full opacity-60 [background:repeating-linear-gradient(90deg,var(--ink-muted)_0px,var(--ink-muted)_2px,transparent_2px,transparent_5px,var(--ink-muted)_5px,var(--ink-muted)_6px,transparent_6px,transparent_10px)]"
+            />
           </div>
-        </motion.div>
+        </Reveal>
+
+        <div className="space-y-6">
+          <Reveal delay={0.1}>
+            <p className="text-lg leading-relaxed text-ink">
+              I spent six years in the U.S. Army as a squad leader in the Signal Corps — leading
+              soldiers in combat zones and installing over{' '}
+              <span className="text-amber">$1M in network infrastructure</span>. The military taught
+              me how to own outcomes when conditions are hostile and the plan just died.
+            </p>
+          </Reveal>
+          <Reveal delay={0.18}>
+            <p className="leading-relaxed text-ink-muted">
+              Then came nine years on manufacturing floors. Machine operator at ISOFlex Packaging and
+              Sonoco — top performer with 95%+ uptime, shift trainer, scrap cut by 10%. Today I work
+              as a lab technician at a blown film extrusion plant while finishing a B.S. in
+              Mechatronics Engineering Technology at Austin Peay State University with a 3.71 GPA.
+            </p>
+          </Reveal>
+          <Reveal delay={0.26}>
+            <p className="leading-relaxed text-ink-muted">
+              That stack of experience is the whole point. Factories don&apos;t need more dashboards
+              built by people who&apos;ve never stood at the line. They need predictive maintenance
+              that respects how machines actually fail, expert systems that encode real process
+              knowledge, and interfaces an operator can use mid-shift. That&apos;s what I build —
+              {' '}{liveCount} of them are deployed and live right now.
+            </p>
+          </Reveal>
+          <Reveal delay={0.34}>
+            <blockquote className="border-l-2 border-amber bg-panel px-6 py-5">
+              <p className="font-display text-xl font-semibold leading-snug text-ink sm:text-2xl">
+                &ldquo;I build software for the people I used to stand next to.&rdquo;
+              </p>
+            </blockquote>
+          </Reveal>
+          <Reveal delay={0.4}>
+            <div className="flex flex-wrap gap-2 pt-1">
+              {['US Army Veteran', 'Plant Floor Native', 'Mechatronics + AI', 'Ship It Mentality'].map(
+                (chip) => (
+                  <span key={chip} className="chip">
+                    {chip}
+                  </span>
+                ),
+              )}
+            </div>
+          </Reveal>
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }

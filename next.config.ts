@@ -12,9 +12,6 @@ const nextConfig: NextConfig = {
     trailingSlash: true,
   }),
 
-  // Transpile Three.js packages for better compatibility
-  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
-
   // Optimize for production
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

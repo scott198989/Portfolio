@@ -1,38 +1,54 @@
-# Scott Tuschl's Portfolio
+# scott-tuschl.com
 
-## Introduction
+Personal portfolio of **Scott Tuschl** — mechatronics engineer building AI systems for the plant floor.
 
-Hey there, welcome to my portfolio! If you're here, chances are you're interested in what I can do. And let me tell you, there's quite a bit. From HTML and JavaScript to throwing in some smooth CSS styles, this portfolio aims to showcase my journey into the tech world.
+Live at **[scott-tuschl.com](https://www.scott-tuschl.com)**.
 
-I gotta give a shoutout to Codehal. The layout, responsive design, and functionality of their work got my creative juices flowing and served as inspiration for this portfolio.  To see the site in action, please visit: https://www.scott-tuschl.com 
+## Design
 
-## Features 
+The site is built around an **industrial control-room / HMI** design language: near-black graphite, safety-amber and telemetry-cyan accents, blueprint grid, monospace data readouts, corner-bracketed panels, and an engineering-drawing title block for a footer.
 
-- 🤝 **Contact Me**: Slide into my DMs without leaving the page, thanks to Formspree.
-- 🗓 **Schedule a Meeting**: Wanna chat? Use Setmore to lock in some face-to-face time.
-- 👨‍💻 **Tech Stack**: This beauty's built using HTML, JavaScript, and CSS. Simple, clean, and effective.
+Signature pieces:
 
-## Installation
+- **Bespoke canvas hero** — a seeded, deterministic circuit-trace network with signal pulses flowing along Manhattan-routed paths. Hand-written 2D canvas (no WebGL, no Three.js), DPR-aware, pauses off-screen, renders a static frame under `prefers-reduced-motion`.
+- **Command palette** — `Ctrl/⌘ + K` for keyboard-first navigation, live project links, and quick actions (copy email, open resume).
+- **Boot sequence panel** — staggered HMI-style init telemetry in the hero.
+- **Printable resume** — `/resume` renders a clean paper document straight from the same data files that power the site; `Print / Save PDF` just works.
+- **Project lightbox** — filterable project grid with screenshot carousels and a keyboard-driven fullscreen viewer.
 
-If you're geeky and want to run this on your machine, here's how:
+## Stack
 
-1. Clone this repo
-2. Navigate to the project directory
-3. Open `index.html` in your browser
-4. It also helps if you have live server installed in vscode
+- [Next.js 15](https://nextjs.org/) (App Router, static export)
+- TypeScript · Tailwind CSS · Framer Motion
+- Zero heavyweight runtime deps — ~178 kB first-load JS
 
-## Quick Look
+## Architecture
 
-Here's a quick rundown of the sections in this portfolio:
+```
+app/          pages, metadata, sitemap/robots, global styles
+components/   Nav, CommandPalette, hero/ (canvas sim), projects/, sections/, ui/
+data/         single source of truth: profile, projects, experience, capabilities
+```
 
-- About Me
-- Skills
-- Education
-- Resume
-- Contact Info
+All copy on the site (and the resume) is rendered from `data/*.ts` — update the data, and the site, palette, and printable resume stay in sync.
 
-## Wanna Connect?
+## Development
 
-I love connecting with like-minded folks. So, if you have questions, want to drop some comments, or simply want to chat, don't hesitate. You know where to find me!
+```bash
+npm install
+npm run dev        # dev server
+npm run build      # static export to out/
+npm run typecheck
+```
 
-Catch more of my work and connect with me on [LinkedIn](https://linkedin.com/in/scott-tuschl/).
+## Deployment
+
+Pushes to `main` build and deploy to GitHub Pages via `.github/workflows/deploy.yml` (custom domain via `public/CNAME`). The same codebase deploys to Vercel without the static-export flags (`vercel.json`).
+
+## Accessibility
+
+Reduced-motion support across CSS, Framer Motion (`MotionConfig reducedMotion="user"`), and the canvas sim; keyboard-complete navigation (palette, carousels, lightbox); semantic landmarks and a skip link.
+
+---
+
+© Scott Tuschl · Designed & engineered, not templated.
